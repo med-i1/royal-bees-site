@@ -66,7 +66,7 @@
 
 ---
 
-### المهمة 1: هيكل المشروع والهوية والتخطيط الأساسي
+### Task 1: هيكل المشروع والهوية والتخطيط الأساسي
 
 **الملفات:**
 - إنشاء: `package.json`، و`astro.config.mjs` (site: `https://royalbeeseg.com`، والتكاملات: sitemap)، و`tsconfig.json` (strict)، و`vitest.config.ts`، و`playwright.config.ts` (webServer: `npm run preview`، والمشاريع: Desktop Chrome 1440×900 وPixel 7 وiPhone 14 WebKit)
@@ -104,7 +104,7 @@
 - [ ] **الخطوة 6:** اعرض `logo.svg` جنب `logo-source.png` على المستخدم وخد موافقته على الشعار.
 - [ ] **الخطوة 7:** commit بالرسالة `chore: scaffold Astro site with brand tokens, base layout and logo`.
 
-### المهمة 2: الكتالوج وأدوات العرض
+### Task 2: الكتالوج وأدوات العرض
 
 **الملفات:**
 - إنشاء: `src/data/products.ts`، و`src/lib/format.ts`
@@ -158,7 +158,7 @@
 - [ ] **الخطوة 4:** شغّل `npx vitest run tests/unit`. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: add catalog data and Arabic formatting helpers`.
 
-### المهمة 3: منطق قائمة الطلب ورسالة واتساب
+### Task 3: منطق قائمة الطلب ورسالة واتساب
 
 **الملفات:**
 - إنشاء: `src/lib/order.ts`
@@ -204,7 +204,7 @@
 - [ ] **الخطوة 4:** شغّل `npx vitest run tests/unit`. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: order list logic and WhatsApp message builder`.
 
-### المهمة 4: الهيدر والفوتر والقائمة ودرج الطلب
+### Task 4: الهيدر والفوتر والقائمة ودرج الطلب
 
 **الملفات:**
 - إنشاء: `src/components/Header.astro`، و`src/components/Footer.astro`، و`src/components/MobileMenu.astro`، و`src/components/OrderDrawer.astro`، و`src/components/AddToOrder.astro`، و`src/scripts/order-ui.ts`
@@ -239,7 +239,7 @@
 - [ ] **الخطوة 4:** شغّل `npx playwright test tests/e2e/order.spec.ts`. المتوقع: PASS على المشاريع التلاتة.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: header, footer, mobile menu and WhatsApp order drawer`.
 
-### المهمة 5: هيرو القصة ونظام الحركة
+### Task 5: هيرو القصة ونظام الحركة
 
 **الملفات:**
 - نقل: `royal-bees/spike/media/story/{d,m}/*.webp` إلى `public/media/story/{d,m}/`، و`story-poster*.jpg` إلى `public/media/`
@@ -285,7 +285,7 @@
 - [ ] **الخطوة 4:** شغّل نفس الأوامر. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: scroll-driven story hero and shared motion system`.
 
-### المهمة 6: صور المنتجات من موقع العميل
+### Task 6: صور المنتجات من موقع العميل
 
 **الملفات:**
 - إنشاء: `scripts/fetch-product-images.mjs`، و`scripts/image-map.json` (`slug` → رابط الصورة الأصلي)، و`public/images/products/*.webp`
@@ -301,7 +301,7 @@
 - [ ] **الخطوة 5:** شغّل الاختبار. المتوقع: PASS. اعرض قائمة المنتجات اللي أخدت placeholder على المستخدم.
 - [ ] **الخطوة 6:** commit بالرسالة `feat: product images from client site`.
 
-### المهمة 7: باقي أقسام الصفحة الرئيسية
+### Task 7: باقي أقسام الصفحة الرئيسية
 
 **الملفات:**
 - إنشاء: `src/components/home/Collections.astro`، و`Featured.astro`، و`Guarantee.astro`، و`Chooser.astro`، و`Numbers.astro`، و`Faq.astro`، و`FinalCta.astro`، و`src/components/ProductCard.astro`، و`src/scripts/chooser.ts`
@@ -338,7 +338,7 @@
 - [ ] **الخطوة 4:** شغّل نفس الأمر. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: home page sections`.
 
-### المهمة 8: الكتالوج وصفحات العائلات
+### Task 8: الكتالوج وصفحات العائلات
 
 **الملفات:**
 - إنشاء: `src/pages/honey/index.astro`، و`src/pages/honey/[family].astro`، و`src/scripts/catalog-filter.ts`
@@ -359,7 +359,7 @@
 - [ ] **الخطوة 4:** شغّل. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: catalog and family pages with URL filters`.
 
-### المهمة 9: صفحة المنتج
+### Task 9: صفحة المنتج
 
 **الملفات:**
 - إنشاء: `src/pages/product/[slug].astro`، و`src/components/SizePicker.astro`، و`src/components/QtyStepper.astro`، و`src/scripts/product.ts`
@@ -383,7 +383,7 @@
 - [ ] **الخطوة 4:** شغّل. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: product page with size picker, quantity and order actions`.
 
-### المهمة 10: صفحات المحتوى والموسوعة
+### Task 10: صفحات المحتوى والموسوعة
 
 **الملفات:**
 - إنشاء: `src/pages/guarantee.astro`، و`src/pages/about.astro`، و`src/pages/contact.astro`، و`src/pages/404.astro`، و`src/content.config.ts` (collection `encyclopedia`: `{ title: string; description: string; date: Date; cover?: string }`)، و`src/content/encyclopedia/*.mdx`، و`src/pages/encyclopedia/index.astro`، و`src/pages/encyclopedia/[slug].astro`
@@ -402,7 +402,7 @@
 - [ ] **الخطوة 4:** شغّل. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: guarantee, about, contact, 404 and encyclopedia`.
 
-### المهمة 11: SEO والبيانات المنظمة
+### Task 11: SEO والبيانات المنظمة
 
 **الملفات:**
 - إنشاء: `src/lib/jsonld.ts`، و`public/robots.txt`، و`public/og-default.jpg` (الشعار على `--bg`، 1200×630)
@@ -432,7 +432,7 @@
 - [ ] **الخطوة 4:** شغّل. المتوقع: PASS.
 - [ ] **الخطوة 5:** commit بالرسالة `feat: SEO metadata, JSON-LD and sitemap`.
 
-### المهمة 12: الأداء والفحص النهائي وتجهيز النشر
+### Task 12: الأداء والفحص النهائي وتجهيز النشر
 
 **الملفات:**
 - إنشاء: `scripts/budget.mjs`، و`netlify.toml` (build: `npm run build`، publish: `dist`، وheaders: كاش سنة لـ `/media/*` و`/_astro/*`)، و`docs/qa-checklist.md`
