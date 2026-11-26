@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مملكة النحل · نموذج الهيرو</title>
+<meta name="theme-color" content="#140B05">
+<script>
+  // Hide animated elements before first paint only when motion is allowed.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#140B05; --bg-2:#1C1008; --surface:#24150A;
+  --gold:#E8A317; --gold-2:#F7C45A; --honey:#F5B21A;
+  --cream:#F7EBD3; --muted:#CDB99C; --line:rgba(247,235,211,.12);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --font-display:"El Messiri", "Times New Roman", serif;
+  --font-body:"IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--font-body);font-size:1rem;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:8px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.85rem clamp(1rem,4vw,3rem);transition:background-color .4s, border-color .4s, backdrop-filter .4s;border-bottom:1px solid transparent}
+.site-header.scrolled{background:rgba(20,11,5,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--font-display);font-weight:700;font-size:1.4rem;line-height:1}
+.brand svg{width:36px;height:36px;flex:none}
+.nav{display:flex;gap:2.2rem;font-size:.95rem;color:var(--muted)}
+.nav a{position:relative;padding:.6rem 0;transition:color .25s}
+.nav a:hover{color:var(--cream)}
+.nav a::after{content:"";position:absolute;inset:auto 0 .35rem 0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease-out)}
+.nav a:hover::after{transform:scaleX(1)}
+.header-actions{display:flex;align-items:center;gap:.5rem}
+.icon-btn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);color:var(--cream);background:transparent;cursor:pointer;transition:border-color .25s, background-color .25s}
+.icon-btn:hover{border-color:var(--gold-2);background:rgba(247,196,90,.07)}
+.icon-btn svg{width:20px;height:20px}
+.menu-btn{display:none}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:0 1.7rem;border-radius:999px;font:600 1rem/1 var(--font-body);
+  transition:transform .35s var(--ease-out), box-shadow .35s var(--ease-out), background-color .3s, border-color .3s;cursor:pointer;white-space:nowrap}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:linear-gradient(180deg,#F9CC66,#E8A317);color:#2A1606;box-shadow:0 12px 30px -12px rgba(232,163,23,.7), inset 0 1px 0 rgba(255,255,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(232,163,23,.85), inset 0 1px 0 rgba(255,255,255,.45)}
+.btn-ghost{border:1px solid rgba(247,235,211,.28);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--gold-2);background:rgba(247,196,90,.07)}
+.btn:active{transform:scale(.97)}
+.btn-sm{min-height:44px;padding:0 1.2rem;font-size:.92rem}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:2rem;
+  padding:6.5rem clamp(1.25rem,6vw,5.5rem) 3rem;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(55% 60% at 27% 60%, rgba(232,163,23,.17), transparent 70%),
+  radial-gradient(35% 35% at 88% 8%, rgba(247,196,90,.06), transparent 70%),
+  linear-gradient(180deg,#1B0F07 0%, var(--bg) 100%)}
+.hero-comb{position:absolute;inset:0;z-index:-1;opacity:.08;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23F7C45A' stroke-width='1'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23F7C45A' stroke-width='1'/%3E%3C/svg%3E");
+  background-size:56px 100px;
+  -webkit-mask-image:radial-gradient(60% 65% at 28% 55%, #000 10%, transparent 72%);mask-image:radial-gradient(60% 65% at 28% 55%, #000 10%, transparent 72%)}
+.pollen{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.pollen i{position:absolute;display:block;width:var(--s);height:var(--s);border-radius:50%;background:#FFD978;box-shadow:0 0 8px 2px rgba(255,200,80,.45);opacity:0;
+  animation:float var(--d) linear var(--dl) infinite;will-change:transform,opacity}
+@keyframes float{0%{transform:translate3d(0,0,0);opacity:0}15%{opacity:.75}85%{opacity:.5}100%{transform:translate3d(var(--x),-160px,0);opacity:0}}
+
+.hero-copy{position:relative;z-index:2;max-width:37rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.92rem;font-weight:500;color:var(--gold-2)}
+.eyebrow::before{content:"";width:30px;height:1px;background:currentColor;opacity:.8}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.5rem,6vw,5.4rem);line-height:1.18;margin:1.1rem 0 1.3rem;letter-spacing:0}
+.h1-line{display:block;overflow:hidden;padding-block:.04em .12em}
+.h1-line>span{display:inline-block;will-change:transform}
+.accent{background:linear-gradient(100deg,#FFE7A8 0%,#F7C45A 35%,#E8A317 65%,#C9790A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(1rem,1.25vw,1.15rem);color:var(--muted);max-width:33rem}
+.lead strong{color:var(--cream);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;margin-top:2.2rem;list-style:none;font-size:.92rem;color:var(--muted)}
+.trust li{display:flex;align-items:center;gap:.5rem}
+.trust svg{width:18px;height:18px;color:var(--gold-2);flex:none}
+
+.hero-scene{position:relative;justify-self:center;width:min(100%,500px,calc((100svh - 7rem) * 400 / 620));aspect-ratio:400/620}
+.hero-scene svg{display:block;width:100%;height:100%;overflow:visible}
+.scroll-cue{position:absolute;inset:auto 0 1.4rem 0;margin:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted)}
+.scroll-cue span{width:1px;height:38px;background:linear-gradient(var(--gold-2),transparent);transform-origin:top;animation:cue 2.2s var(--ease-out) infinite}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* initial states (only when JS + motion allowed) */
+.js .site-header{opacity:0;transform:translateY(-14px)}
+.js .h1-line>span{transform:translateY(115%)}
+.js .reveal{opacity:0;transform:translateY(22px)}
+.js #jar,.js #lid,.js #jarShadow{opacity:0}
+.js .sr{opacity:0;transform:translateY(40px)}
+
+/* ---------- collections ---------- */
+.collections{position:relative;padding:clamp(5rem,10vw,8rem) clamp(1.25rem,6vw,5.5rem);background:linear-gradient(180deg,var(--bg),var(--bg-2))}
+.sec-head{max-width:40rem;margin-bottom:3.2rem}
+.sec-head h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);line-height:1.2;margin:.6rem 0 .8rem}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}
+.card{position:relative;padding:2rem 1.8rem 1.8rem;border-radius:22px;background:linear-gradient(180deg,rgba(247,235,211,.05),rgba(247,235,211,.015));border:1px solid var(--line);
+  transition:transform .5s var(--ease-out), border-color .4s, box-shadow .5s var(--ease-out);overflow:hidden}
+.card::before{content:"";position:absolute;inset:-40% -20% auto auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(var(--tone),transparent 65%);opacity:.18;transition:opacity .5s}
+.card:hover{transform:translateY(-6px);border-color:rgba(247,196,90,.35);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.card:hover::before{opacity:.32}
+.card-art{width:84px;height:96px;margin-bottom:1.6rem;transition:transform .6s var(--ease-out)}
+.card:hover .card-art{transform:rotate(-8deg) scale(1.05)}
+.card h3{font-family:var(--font-display);font-size:1.6rem;line-height:1.3;margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.97rem;min-height:3.4em}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.price{font-size:.95rem;color:var(--muted)}
+.price b{color:var(--gold-2);font-weight:600;font-size:1.1rem}
+.card-link{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;font-weight:600;font-size:.95rem;color:var(--cream)}
+.card-link svg{width:18px;height:18px;transition:transform .35s var(--ease-out)}
+.card:hover .card-link svg{transform:translateX(-4px)}
+.site-foot{padding:2.5rem 1.25rem;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);background:var(--bg-2)}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px){
+  .nav,.header-actions .btn{display:none}
+  .menu-btn{display:grid}
+  .hero{grid-template-columns:1fr;gap:.5rem;padding-top:4.6rem;padding-bottom:4.5rem;text-align:center;align-content:start}
+  .hero-scene{order:-1;width:min(60vw,290px);margin-top:.25rem}
+  .hero-copy{margin-inline:auto}
+  .hero h1{margin:.7rem 0 .9rem}
+  .lead{margin-inline:auto}
+  .actions,.trust{justify-content:center}
+  .actions .btn{flex:1 1 auto}
+  .trust{gap:.5rem 1.1rem;font-size:.85rem;margin-top:1.6rem}
+  .cards{grid-template-columns:1fr}
+  .scroll-cue{display:none}
+}
+@media (max-width: 900px) and (max-height: 700px){
+  .hero-scene{width:min(50vw,230px)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .pollen,.scroll-cue span{display:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#top" aria-label="مملكة النحل، الصفحة الرئيسية">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <path d="M20 2.5 35.2 11.25v17.5L20 37.5 4.8 28.75v-17.5Z" fill="none" stroke="#F7C45A" stroke-width="1.6"/>
+      <path d="M20 9.5 29.1 14.75v10.5L20 30.5l-9.1-5.25v-10.5Z" fill="#E8A317"/>
+      <path d="M15.5 17.5h9M15 21h10M15.5 24.5h9" stroke="#2A1606" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <span>مملكة النحل</span>
+  </a>
+  <nav class="nav" aria-label="القائمة الرئيسية">
+    <a href="#honey">العسل</a>
+    <a href="#honey">منتجات الخلية</a>
+    <a href="#honey">الضمان</a>
+    <a href="#honey">موسوعة العسل</a>
+  </nav>
+  <div class="header-actions">
+    <a class="btn btn-ghost btn-sm" href="#" data-wa>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.85 2.03 4.75 4.75 0 0 0 1 2.53 10.9 10.9 0 0 0 4.18 3.69c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.1-.22-.17-.47-.29Z"/></svg>
+      اطلب على واتساب
+    </a>
+    <button class="icon-btn menu-btn" type="button" aria-label="فتح القائمة">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M10 17h10"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero" aria-labelledby="heroTitle">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-comb" aria-hidden="true"></div>
+  <div class="pollen" id="pollen" aria-hidden="true"></div>
+
+  <div class="hero-copy" id="heroCopy">
+    <p class="eyebrow reveal">أكثر من ٣٠ سنة · أبو النمرس، الجيزة</p>
+    <h1 id="heroTitle">
+      <span class="h1-line"><span>عسلٌ كما</span></span>
+      <span class="h1-line"><span class="accent">صنعته النحلة</span></span>
+    </h1>
+    <p class="lead reveal">سدر جبلي، مانوكا، وعسل مصري بجودة التصدير. وكل برطمان معاه <strong>ضمان ذهبي</strong>: لو التحليل المعملي أثبت إنه مش طبيعي، فلوسك ترجعلك كاملة.</p>
+    <div class="actions reveal">
+      <a class="btn btn-primary" href="#honey">
+        تصفّح العسل
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#" data-wa>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.85 2.03 4.75 4.75 0 0 0 1 2.53 10.9 10.9 0 0 0 4.18 3.69c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.1-.22-.17-.47-.29Z"/></svg>
+        اطلب على واتساب
+      </a>
+    </div>
+    <ul class="trust reveal">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12.2 2.2 2.2 4.4-4.6"/></svg>ضمان التحليل المعملي</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>توصيل القاهرة والجيزة</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19.8 7.5v9L12 21l-7.8-4.5v-9Z"/><path d="M12 8v4l2.5 1.5"/></svg>خبرة +٣٠ سنة</li>
+    </ul>
+  </div>
+
+  <div class="hero-scene" id="heroScene">
+    <svg id="scene" viewBox="0 0 400 620" role="img" aria-label="عصاية عسل خشب بيتدفق منها العسل في برطمان مملكة النحل">
+      <defs>
+        <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#E4B278"/><stop offset=".45" stop-color="#B47B40"/><stop offset="1" stop-color="#6B4019"/>
+        </linearGradient>
+        <linearGradient id="woodRing" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#F2C990"/><stop offset=".5" stop-color="#C38947"/><stop offset="1" stop-color="#77481C"/>
+        </linearGradient>
+        <linearGradient id="honeyStream" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#A65A04"/><stop offset=".32" stop-color="#F2A81C"/><stop offset=".5" stop-color="#FFE3A0"/><stop offset=".68" stop-color="#F0A416"/><stop offset="1" stop-color="#9A5204"/>
+        </linearGradient>
+        <linearGradient id="honeyCoat" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FFD873" stop-opacity=".75"/><stop offset=".6" stop-color="#EFA01A" stop-opacity=".92"/><stop offset="1" stop-color="#B86507"/>
+        </linearGradient>
+        <linearGradient id="honeyBody" x1="0" y1="330" x2="0" y2="566" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#FFCB52"/><stop offset=".3" stop-color="#F0A216"/><stop offset=".78" stop-color="#B9640A"/><stop offset="1" stop-color="#7E4005"/>
+        </linearGradient>
+        <linearGradient id="honeySide" x1="120" y1="0" x2="280" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#4A2401" stop-opacity=".6"/><stop offset=".2" stop-color="#4A2401" stop-opacity="0"/>
+          <stop offset=".8" stop-color="#4A2401" stop-opacity="0"/><stop offset="1" stop-color="#4A2401" stop-opacity=".65"/>
+        </linearGradient>
+        <radialGradient id="honeyCore" cx="190" cy="480" r="95" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#FFE08A" stop-opacity=".55"/><stop offset="1" stop-color="#FFE08A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glowGrad">
+          <stop offset="0" stop-color="#F5B21A" stop-opacity=".55"/><stop offset=".45" stop-color="#E8A317" stop-opacity=".16"/><stop offset="1" stop-color="#E8A317" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="shadowGrad">
+          <stop offset="0" stop-color="#000" stop-opacity=".6"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="glassHi" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="labelShade" x1="124" y1="0" x2="276" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#6B4416" stop-opacity=".35"/><stop offset=".18" stop-color="#6B4416" stop-opacity="0"/>
+          <stop offset=".82" stop-color="#6B4416" stop-opacity="0"/><stop offset="1" stop-color="#6B4416" stop-opacity=".4"/>
+        </linearGradient>
+        <linearGradient id="lidGold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FADB8E"/><stop offset=".5" stop-color="#D89A26"/><stop offset="1" stop-color="#8A5610"/>
+        </linearGradient>
+        <clipPath id="jarInner">
+          <path d="M155,316 L155,324 C155,338 123,341 123,362 L123,538 Q123,560 146,560 L254,560 Q277,560 277,538 L277,362 C277,341 245,338 245,324 L245,316 Z"/>
+        </clipPath>
+      </defs>
+
+      <ellipse id="jarGlow" cx="200" cy="440" rx="220" ry="240" fill="url(#glowGrad)" opacity=".2"/>
+      <ellipse id="jarShadow" cx="214" cy="568" rx="150" ry="15" fill="url(#shadowGrad)"/>
+
+      <g id="jar">
+        <path d="M150,312 L150,322 C150,335 118,338 118,360 L118,540 Q118,566 144,566 L256,566 Q282,566 282,540 L282,360 C282,338 250,335 250,322 L250,312 Z" fill="rgba(255,244,225,.045)"/>
+        <g clip-path="url(#jarInner)">
+          <path id="honeyFill" fill="url(#honeyBody)" d=""/>
+          <path id="honeyShade" fill="url(#honeySide)" d=""/>
+          <path id="honeyInner" fill="url(#honeyCore)" d=""/>
+          <path id="honeySurface" fill="none" stroke="#FFE7A6" stroke-width="1.6" stroke-opacity=".85" stroke-linecap="round" d=""/>
+          <g id="ripples">
+            <ellipse class="ripple" fill="none" stroke="#FFE9B0" stroke-width="1.1" rx="0" ry="0" opacity="0"/>
+            <ellipse class="ripple" fill="none" stroke="#FFE9B0" stroke-width="1.1" rx="0" ry="0" opacity="0"/>
+            <ellipse class="ripple" fill="none" stroke="#FFE9B0" stroke-width="1.1" rx="0" ry="0" opacity="0"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- honey stream (enters the jar, so it sits between honey and the front glass) -->
+      <path id="stream" fill="url(#honeyStream)" d=""/>
+      <path id="streamHi" fill="#FFF3D0" fill-opacity=".55" d=""/>
+      <g id="folds">
+        <ellipse class="fold" fill="#F2A81C" stroke="#FFE08A" stroke-width=".8" rx="0" ry="0" opacity="0"/>
+        <ellipse class="fold" fill="#F5B32C" stroke="#FFE08A" stroke-width=".8" rx="0" ry="0" opacity="0"/>
+        <ellipse class="fold" fill="#F8BE3E" stroke="#FFEBB0" stroke-width=".8" rx="0" ry="0" opacity="0"/>
+      </g>
+      <path id="drop" fill="url(#honeyStream)" d=""/>
+      <ellipse id="dropHi" fill="#FFF6DA" opacity="0" rx="0" ry="0"/>
+
+      <!-- front glass, label -->
+      <g id="jarFront">
+        <path d="M150,312 L150,322 C150,335 118,338 118,360 L118,540 Q118,566 144,566 L256,566 Q282,566 282,540 L282,360 C282,338 250,335 250,322 L250,312 Z" fill="none" stroke="rgba(255,238,205,.42)" stroke-width="1.6"/>
+        <path d="M128,548 Q200,566 272,548" fill="none" stroke="rgba(255,238,205,.22)" stroke-width="1.2"/>
+        <rect x="145" y="298" width="110" height="16" rx="5" fill="rgba(255,244,225,.06)" stroke="rgba(255,238,205,.48)" stroke-width="1.4"/>
+        <path d="M148,304.5H252M148,309H252" stroke="rgba(255,238,205,.2)" stroke-width="1"/>
+        <rect x="129" y="368" width="10" height="150" rx="5" fill="url(#glassHi)" opacity=".5"/>
+        <rect x="264" y="384" width="4" height="110" rx="2" fill="url(#glassHi)" opacity=".32"/>
+        <path d="M160,330 C150,338 133,344 131,360" fill="none" stroke="#fff" stroke-opacity=".32" stroke-width="2" stroke-linecap="round"/>
+        <g id="label">
+          <path d="M124,418 Q200,426 276,418 L276,506 Q200,514 124,506 Z" fill="#F4E6C6"/>
+          <path d="M124,418 Q200,426 276,418 L276,506 Q200,514 124,506 Z" fill="url(#labelShade)"/>
+          <path d="M133,427 Q200,434 267,427 L267,497 Q200,504 133,497 Z" fill="none" stroke="#C08A2E" stroke-width=".9"/>
+          <path d="M200,437 l8.5,4.9v9.8l-8.5,4.9-8.5-4.9v-9.8Z" fill="#E8A317" stroke="#8A5610" stroke-width=".8"/>
+          <path d="M196,444.5h8M195.5,447.5h9M196,450.5h8" stroke="#3B200A" stroke-width="1.1" stroke-linecap="round"/>
+          <text x="200" y="477" text-anchor="middle" font-family="El Messiri, serif" font-weight="700" font-size="19" fill="#3B200A">مملكة النحل</text>
+          <text x="200" y="493" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif" font-weight="500" font-size="8.5" fill="#7A5220">عسل نحل طبيعي ١٠٠٪</text>
+        </g>
+      </g>
+
+      <g id="lid" transform="translate(326 548) rotate(-10)">
+        <ellipse cx="0" cy="22" rx="36" ry="5" fill="#000" opacity=".35"/>
+        <rect x="-34" y="0" width="68" height="20" rx="4" fill="url(#lidGold)"/>
+        <path d="M-27 4v12M-19 4v12M-11 4v12M-3 4v12M5 4v12M13 4v12M21 4v12M29 4v12" stroke="#7A4A0C" stroke-opacity=".35" stroke-width="1.2"/>
+        <ellipse cx="0" cy="0" rx="34" ry="5.5" fill="#FBE2A0"/>
+        <ellipse cx="0" cy="0" rx="27" ry="3.6" fill="#E3AA3C"/>
+      </g>
+
+      <ellipse id="glob" fill="url(#honeyStream)" rx="0" ry="0"/>
+
+      <!-- honey dipper: local coords, head centred on 0,0, handle along +x -->
+      <g id="dipper" opacity="0">
+        <path d="M32,-6.5 L198,-5 Q207,-5 207,0 Q207,5 198,5 L32,6.5 Z" fill="url(#wood)"/>
+        <path d="M60,-2.2 Q125,-3.6 195,-1.6" fill="none" stroke="#5A3412" stroke-opacity=".28" stroke-width=".8"/>
+        <path d="M70,2.4 Q130,3.2 190,2" fill="none" stroke="#FFE2B5" stroke-opacity=".18" stroke-width=".8"/>
+        <ellipse cx="209" cy="0" rx="7" ry="9.5" fill="url(#woodRing)"/>
+        <rect x="31" y="-10" width="11" height="20" rx="4" fill="url(#woodRing)"/>
+        <rect x="-40" y="-18" width="72" height="36" rx="12" fill="#5E3812"/>
+        <ellipse cx="-32" cy="0" rx="5.5" ry="24" fill="url(#woodRing)"/>
+        <ellipse cx="-20" cy="0" rx="5.5" ry="24" fill="url(#woodRing)"/>
+        <ellipse cx="-8" cy="0" rx="5.5" ry="24" fill="url(#woodRing)"/>
+        <ellipse cx="4" cy="0" rx="5.5" ry="24" fill="url(#woodRing)"/>
+        <ellipse cx="16" cy="0" rx="5.5" ry="22" fill="url(#woodRing)"/>
+        <ellipse cx="26" cy="0" rx="5" ry="15" fill="url(#woodRing)"/>
+        <!-- honey coating the head -->
+        <path d="M-38,4 C-40,20 -34,26 -24,25.5 C-12,25 -2,26.5 10,24.5 C20,23 27,18 29,9 L29,4 C20,9 10,6 0,8 C-12,10 -26,3 -38,4Z" fill="url(#honeyCoat)"/>
+        <path d="M-30,18 C-22,21 -12,20.5 -4,21" fill="none" stroke="#FFF1C4" stroke-opacity=".7" stroke-width="1.3" stroke-linecap="round"/>
+        <ellipse cx="-31" cy="-14" rx="1.6" ry="5" fill="#FFF3DD" opacity=".35"/>
+        <ellipse cx="-19" cy="-14" rx="1.6" ry="5" fill="#FFF3DD" opacity=".35"/>
+        <ellipse cx="-7" cy="-14" rx="1.6" ry="5" fill="#FFF3DD" opacity=".35"/>
+        <ellipse cx="5" cy="-14" rx="1.6" ry="5" fill="#FFF3DD" opacity=".35"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">اسحب لتحت<span></span></div>
+</section>
+
+<section class="collections" id="honey" aria-labelledby="colTitle">
+  <header class="sec-head">
+    <p class="eyebrow sr">مجموعاتنا</p>
+    <h2 id="colTitle" class="sr">اختار عسلك</h2>
+    <p class="lead sr">من السدر الجبلي النادر لحد عسل البرسيم اللي على سفرتك كل يوم. كل نوع ليه طعمه، وكل برطمان عليه نفس الضمان.</p>
+  </header>
+  <div class="cards">
+    <article class="card sr" style="--tone:#C8700A">
+      <svg class="card-art" viewBox="0 0 84 96" aria-hidden="true">
+        <defs><linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0A12A"/><stop offset="1" stop-color="#8A4705"/></linearGradient></defs>
+        <path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/>
+        <path d="M42 14 70 30v36L42 82 14 66V30Z" fill="url(#c1)"/>
+        <path d="M24 36 42 26" stroke="#FFF3D0" stroke-opacity=".6" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h3>السدر الجبلي</h3>
+      <p>مصري، سعودي، ليبي، حضرمي يمني، دوعني وعصيمي.</p>
+      <div class="card-foot"><span class="price">يبدأ من <b>١٥٠</b> جنيه</span>
+        <a class="card-link" href="#">شوف الأنواع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+    </article>
+    <article class="card sr" style="--tone:#8A4A0A">
+      <svg class="card-art" viewBox="0 0 84 96" aria-hidden="true">
+        <defs><linearGradient id="c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8681A"/><stop offset="1" stop-color="#4E2603"/></linearGradient></defs>
+        <path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/>
+        <path d="M42 14 70 30v36L42 82 14 66V30Z" fill="url(#c2)"/>
+        <path d="M24 36 42 26" stroke="#FFF3D0" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h3>المانوكا</h3>
+      <p>بدرجات UMF من ٥ لحد ١٨، أندر عسل في المجموعة.</p>
+      <div class="card-foot"><span class="price">يبدأ من <b>١٥٠٠</b> جنيه</span>
+        <a class="card-link" href="#">شوف الأنواع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+    </article>
+    <article class="card sr" style="--tone:#F5B21A">
+      <svg class="card-art" viewBox="0 0 84 96" aria-hidden="true">
+        <defs><linearGradient id="c3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD66E"/><stop offset="1" stop-color="#D48A0E"/></linearGradient></defs>
+        <path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/>
+        <path d="M42 14 70 30v36L42 82 14 66V30Z" fill="url(#c3)"/>
+        <path d="M24 36 42 26" stroke="#FFF8E0" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h3>عسل التصدير</h3>
+      <p>برسيم، موالح، بردقوش، حبة البركة وصحراوي.</p>
+      <div class="card-foot"><span class="price">يبدأ من <b>٦٥</b> جنيه</span>
+        <a class="card-link" href="#">شوف الأنواع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">نموذج تجريبي للهيرو فقط، مش الموقع النهائي.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = !!(window.gsap && window.ScrollTrigger);
+  if (!hasGsap) root.classList.remove('js');
+
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+  const header = $('#siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // ---------- scene state ----------
+  const el = {
+    dipper: $('#dipper'), glob: $('#glob'), stream: $('#stream'), streamHi: $('#streamHi'),
+    fill: $('#honeyFill'), shade: $('#honeyShade'), inner: $('#honeyInner'), surface: $('#honeySurface'),
+    drop: $('#drop'), dropHi: $('#dropHi'), glow: $('#jarGlow'),
+    ripples: $$('.ripple'), folds: $$('.fold')
+  };
+  const EMPTY = 556, FULL = 352;
+  const S = { dipX: 214, dipY: -150, rot: -40, dipOp: 0, glob: 0, stream: 0, detach: 0, thin: 1, level: EMPTY, lift: 0, mode: 'intro', mound: 0, kick: 0 };
+  const RIDGE = { x: -32, rx: 5.5, ry: 24 };   // the lowest ridge of the dipper head
+  const D2R = Math.PI / 180;
+
+  function dipperPose() {
+    const rot = S.rot - S.lift * 16;
+    const y = S.dipY - S.lift * 200;
+    const a = rot * D2R, s = Math.sin(a), c = Math.cos(a);
+    // lowest point of the outer ridge ellipse after rotation
+    const R = Math.hypot(RIDGE.rx * s, RIDGE.ry * c);
+    const lx = RIDGE.x + RIDGE.rx * (RIDGE.rx * s / R);
+    const ly = RIDGE.ry * (RIDGE.ry * c / R);
+    return { rot, x: S.dipX, y, tip: { x: S.dipX + lx * c - ly * s, y: y + lx * s + ly * c } };
+  }
+
+  function streamPath(x0, y0, y1, w0, w1, t, xoff, wScale) {
+    const N = 30, L = [], Rr = []; const len = Math.max(0.5, y1 - y0);
+    for (let i = 0; i <= N; i++) {
+      const k = i / N, y = y0 + len * k;
+      const x = x0 + (Math.sin(y * 0.034 - t * 2.3) * 2.1 + Math.sin(t * 1.2) * 1.3) * k * k;
+      const w = (w0 + (w1 - w0) * Math.sqrt(k)) * 0.5 * wScale;
+      const cx = x + xoff * w * 2;
+      L.push((cx - w).toFixed(2) + ',' + y.toFixed(2));
+      Rr.push((cx + w).toFixed(2) + ',' + y.toFixed(2));
+    }
+    return 'M' + L.join('L') + 'L' + Rr.reverse().join('L') + 'Z';
+  }
+  const streamBottomX = (x0, y1, t) => x0 + Math.sin(y1 * 0.034 - t * 2.3) * 2.1 + Math.sin(t * 1.2) * 1.3;
+
+  function surfacePts(level, t, mx, mound) {
+    const pts = [];
+    for (let x = 116; x <= 284; x += 4) {
+      const y = level + Math.sin(x * 0.045 + t * 1.6) * 1.1 - mound * Math.exp(-(((x - mx) / 11) ** 2));
+      pts.push(x + ',' + y.toFixed(2));
+    }
+    return pts;
+  }
+
+  function tear(x, y, r, h) { // y = centre of the round part, h = distance from centre to the tail tip
+    return `M${x},${y - h} C${x + r * 0.3},${y - h * 0.5} ${x + r},${y - r * 0.4} ${x + r},${y} A${r},${r} 0 1 1 ${x - r},${y} C${x - r},${y - r * 0.4} ${x - r * 0.3},${y - h * 0.5} ${x},${y - h}Z`;
+  }
+
+  const rip = el.ripples.map(() => ({ t: -9, x: 200 }));
+  let ripIdx = 0, lastPourRipple = 0;
+  function spawnRipple(x, now) { rip[ripIdx] = { t: now, x }; ripIdx = (ripIdx + 1) % rip.length; }
+
+  const drip = { phase: 'rest', timer: 0, r: 0, y: 0, v: 0, x: 0 };
+  let time = 0;
+
+  function render(dt) {
+    time += dt;
+    const P = dipperPose();
+    const T = P.tip;
+    const op = Math.max(0, S.dipOp * (1 - S.lift * 1.3));
+    el.dipper.setAttribute('transform', `translate(${P.x.toFixed(2)} ${P.y.toFixed(2)}) rotate(${P.rot.toFixed(2)})`);
+    el.dipper.setAttribute('opacity', op.toFixed(3));
+
+    // glob hanging under the head
+    const g = S.glob;
+    el.glob.setAttribute('cx', T.x.toFixed(2)); el.glob.setAttribute('cy', (T.y - 1.5).toFixed(2));
+    el.glob.setAttribute('rx', (6 * g).toFixed(2)); el.glob.setAttribute('ry', (5 * g).toFixed(2));
+    el.glob.setAttribute('opacity', op.toFixed(3));
+
+    const surf = S.level;
+    let pour = 0, bx = T.x;
+
+    // stream
+    if (S.stream > 0 && S.detach < 1) {
+      const yBotTarget = surf - S.mound * 0.5;
+      const yTop = T.y - 1 + (yBotTarget - T.y) * S.detach;
+      const yBot = T.y + (yBotTarget - T.y) * S.stream;
+      const w0 = 8.5 * S.thin * (1 - S.detach * 0.5), w1 = 3.4 * S.thin * (1 - S.detach * 0.4);
+      el.stream.setAttribute('d', streamPath(T.x, yTop, yBot, w0, w1, time, 0, 1));
+      el.streamHi.setAttribute('d', streamPath(T.x, yTop + 2, yBot - 2, w0, w1, time, -0.18, 0.22));
+      bx = streamBottomX(T.x, yBot, time);
+      if (S.stream >= 0.999) pour = S.thin * (1 - S.detach);
+    } else {
+      el.stream.setAttribute('d', ''); el.streamHi.setAttribute('d', '');
+    }
+
+    // mound where the stream lands + decaying kick from drops
+    const target = pour > 0 ? (5.5 + 1.3 * Math.sin(time * 7)) * pour : 0;
+    S.mound += (target - S.mound) * Math.min(1, dt * 8);
+    S.kick *= Math.exp(-dt * 6);
+    const mound = S.mound + S.kick * Math.max(0, Math.cos(time * 18));
+    const mx = pour > 0 ? bx : drip.x || T.x;
+
+    // ribbon folds coiling on the surface
+    el.folds.forEach((f, i) => {
+      const a = pour;
+      f.setAttribute('cx', (bx + Math.sin(time * 4 + i * 2.1) * (2.5 + i)).toFixed(2));
+      f.setAttribute('cy', (surf - S.mound * 0.6 - i * 2.4 + 2).toFixed(2));
+      f.setAttribute('rx', Math.max(0, (9 - i * 2.4) * a).toFixed(2));
+      f.setAttribute('ry', (2.3 - i * 0.3).toFixed(2));
+      f.setAttribute('opacity', (0.95 * a).toFixed(3));
+    });
+
+    if (pour > 0.3 && time - lastPourRipple > 0.55) { spawnRipple(bx, time); lastPourRipple = time; }
+
+    // drip loop after the pour ends
+    if (S.mode === 'drip') {
+      drip.timer += dt;
+      if (drip.phase === 'rest') {
+        drip.r = 0;
+        if (drip.timer > 0.9) { drip.phase = 'grow'; drip.timer = 0; }
+      } else if (drip.phase === 'grow') {
+        const k = Math.min(1, drip.timer / 1.6);
+        drip.r = 5.2 * (k < .5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2);
+        drip.x = T.x; drip.y = T.y + 1 + drip.r * 1.3;
+        if (k >= 1) { drip.phase = 'fall'; drip.v = 0; drip.timer = 0; }
+      } else if (drip.phase === 'fall') {
+        drip.v += 1500 * dt; drip.y += drip.v * dt;
+        if (drip.y >= surf - 2) { spawnRipple(drip.x, time); S.kick = 5; drip.phase = 'rest'; drip.timer = 0; drip.r = 0; }
+      }
+      if (drip.r > 0.2) {
+        const h = drip.phase === 'grow' ? drip.y - T.y + 1 : drip.r * (2 + Math.min(1.4, drip.v / 500));
+        el.drop.setAttribute('d', tear(drip.x, drip.y, drip.r, h));
+        el.dropHi.setAttribute('cx', (drip.x - drip.r * 0.35).toFixed(2)); el.dropHi.setAttribute('cy', (drip.y - drip.r * 0.15).toFixed(2));
+        el.dropHi.setAttribute('rx', (drip.r * 0.22).toFixed(2)); el.dropHi.setAttribute('ry', (drip.r * 0.42).toFixed(2));
+        el.dropHi.setAttribute('opacity', '.6');
+      } else { el.drop.setAttribute('d', ''); el.dropHi.setAttribute('opacity', '0'); }
+    }
+
+    // honey body + surface
+    const pts = surfacePts(surf, time, mx, mound);
+    const fillD = 'M' + pts.join('L') + 'L284,580L116,580Z';
+    el.fill.setAttribute('d', fillD); el.shade.setAttribute('d', fillD); el.inner.setAttribute('d', fillD);
+    el.surface.setAttribute('d', 'M' + pts.join('L'));
+
+    rip.forEach((r, i) => {
+      const p = (time - r.t) / 1.2, e = el.ripples[i];
+      if (p >= 0 && p < 1) {
+        const rx = 5 + 46 * p;
+        e.setAttribute('cx', r.x.toFixed(2)); e.setAttribute('cy', (surf + 1).toFixed(2));
+        e.setAttribute('rx', rx.toFixed(2)); e.setAttribute('ry', (rx * 0.2).toFixed(2));
+        e.setAttribute('opacity', (0.6 * (1 - p) ** 1.5).toFixed(3));
+      } else e.setAttribute('opacity', '0');
+    });
+
+    const fillFrac = (EMPTY - surf) / (EMPTY - FULL);
+    el.glow.setAttribute('opacity', (0.18 + 0.6 * fillFrac).toFixed(3));
+  }
+
+  // ---------- reduced motion / no GSAP: draw the finished still ----------
+  if (reduce || !hasGsap) {
+    Object.assign(S, { dipY: 140, rot: -28, dipOp: 1, glob: 1, level: FULL, mode: 'still' });
+    render(0);
+    const T = dipperPose().tip;
+    el.drop.setAttribute('d', tear(T.x, T.y + 8, 4.6, 8.5));
+    return;
+  }
+
+  // ---------- pollen ----------
+  const pollen = $('#pollen');
+  const count = window.innerWidth < 700 ? 9 : 16;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('i');
+    p.style.cssText = `left:${(Math.random() * 100).toFixed(1)}%;top:${(30 + Math.random() * 65).toFixed(1)}%;--s:${(1.5 + Math.random() * 2.5).toFixed(1)}px;--d:${(9 + Math.random() * 9).toFixed(1)}s;--dl:-${(Math.random() * 12).toFixed(1)}s;--x:${(Math.random() * 60 - 30).toFixed(0)}px`;
+    pollen.appendChild(p);
+  }
+
+  // ---------- frame loop, paused when the hero is off screen ----------
+  let last = performance.now();
+  const tick = () => { const now = performance.now(); const dt = Math.min(0.05, (now - last) / 1000); last = now; render(dt); };
+  let running = false;
+  const start = () => { if (!running) { last = performance.now(); gsap.ticker.add(tick); running = true; } };
+  const stop = () => { if (running) { gsap.ticker.remove(tick); running = false; } };
+  new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { rootMargin: '100px' }).observe($('#hero'));
+  start();
+
+  // ---------- intro choreography ----------
+  gsap.registerPlugin(ScrollTrigger);
+  const tl = gsap.timeline({ delay: 0.15 });
+  tl.to('#siteHeader', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0)
+    .to(['#jar', '#jarShadow', '#lid'], { opacity: 1, duration: 1.1, ease: 'power2.out', stagger: 0.08 }, 0.1)
+    .from('#jar', { y: 26, duration: 1.2, ease: 'power3.out' }, 0.1)
+    .to(S, { dipY: 140, rot: -28, dipOp: 1, duration: 1.4, ease: 'power3.out' }, 0.3)
+    .to(S, { glob: 1, duration: 0.6, ease: 'back.out(2)' }, 1.15)
+    .to(S, { stream: 1, duration: 0.55, ease: 'power2.in' }, 1.5)
+    .to(S, { level: FULL, duration: 3.4, ease: 'power1.inOut' }, 1.8)
+    .to('.h1-line>span', { y: 0, duration: 1.2, ease: 'power4.out', stagger: 0.13 }, 1.6)
+    .to('.reveal', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.09 }, 1.85)
+    .to(S, { thin: 0.35, duration: 0.9, ease: 'sine.inOut' }, 5.0)
+    .to(S, { detach: 1, duration: 0.5, ease: 'power2.in' }, 5.85)
+    .call(() => { S.mode = 'drip'; S.stream = 0; drip.phase = 'rest'; drip.timer = 0.2; }, null, 6.35);
+  window.__hero = { tl, S, render }; // spike-only debug hook
+
+  // ---------- scroll: dipper lifts away, jar settles, copy drifts up ----------
+  const st = { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 0.6 };
+  gsap.to(S, { lift: 1, ease: 'none', scrollTrigger: st });
+  gsap.to('#heroScene', { yPercent: 12, scale: 0.92, ease: 'none', scrollTrigger: st });
+  gsap.to('#heroCopy', { y: -70, opacity: 0, ease: 'none', scrollTrigger: { ...st, end: '75% top' } });
+
+  ScrollTrigger.batch('.sr', {
+    start: 'top 86%', once: true,
+    onEnter: (b) => gsap.to(b, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.12 })
+  });
+})();
+</script>
+</body>
+</html>

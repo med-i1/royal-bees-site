@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مملكة النحل · هيرو بالسكرول</title>
+<meta name="theme-color" content="#140B05">
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="media/scroll-poster.jpg" media="(min-width: 901px)">
+<link rel="preload" as="image" href="media/scroll-poster-mobile.jpg" media="(max-width: 900px)">
+<style>
+:root{
+  --bg:#140B05; --bg-2:#1C1008;
+  --gold:#E8A317; --gold-2:#F7C45A;
+  --cream:#F7EBD3; --muted:#CDB99C; --line:rgba(247,235,211,.12);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --font-display:"El Messiri","Times New Roman",serif;
+  --font-body:"IBM Plex Sans Arabic",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--font-body);line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:8px}
+
+/* header */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem clamp(1rem,4vw,3rem);
+  border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
+.site-header.scrolled{background:rgba(20,11,5,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--font-display);font-weight:700;font-size:1.4rem;line-height:1}
+.brand svg{width:36px;height:36px;flex:none}
+.nav{display:flex;gap:2.2rem;font-size:.95rem;color:var(--muted)}
+.nav a{position:relative;padding:.6rem 0;transition:color .25s}
+.nav a:hover{color:var(--cream)}
+.nav a::after{content:"";position:absolute;inset:auto 0 .35rem 0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease-out)}
+.nav a:hover::after{transform:scaleX(1)}
+.header-actions{display:flex;align-items:center;gap:.5rem}
+.icon-btn{display:none;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);color:var(--cream);background:transparent;cursor:pointer}
+.icon-btn svg{width:20px;height:20px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:0 1.7rem;border-radius:999px;font:600 1rem/1 var(--font-body);white-space:nowrap;cursor:pointer;
+  transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background-color .3s,border-color .3s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:linear-gradient(180deg,#F9CC66,#E8A317);color:#2A1606;box-shadow:0 12px 30px -12px rgba(232,163,23,.7),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(232,163,23,.85),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn-ghost{border:1px solid rgba(247,235,211,.3);color:var(--cream);background:rgba(20,11,5,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.btn-ghost:hover{border-color:var(--gold-2);background:rgba(247,196,90,.08)}
+.btn:active{transform:scale(.97)}
+.btn-sm{min-height:44px;padding:0 1.2rem;font-size:.92rem}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;
+  padding:6.5rem clamp(1.25rem,6vw,5.5rem) 4rem;overflow:hidden;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-2;background:#140B05 url("media/scroll-poster.jpg") left center/cover no-repeat}
+.hero-media canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease}
+.hero-media canvas.ready{opacity:1}
+.hero-media .zoom{position:absolute;inset:0;will-change:transform}
+.hero-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(to left, rgba(20,11,5,.9) 0%, rgba(20,11,5,.55) 38%, rgba(20,11,5,0) 62%),
+  linear-gradient(to top, var(--bg) 0%, rgba(20,11,5,0) 22%),
+  linear-gradient(to bottom, rgba(20,11,5,.55) 0%, rgba(20,11,5,0) 18%)}
+.pollen{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.pollen i{position:absolute;display:block;width:var(--s);height:var(--s);border-radius:50%;background:#FFD978;box-shadow:0 0 8px 2px rgba(255,200,80,.45);opacity:0;
+  animation:float var(--d) linear var(--dl) infinite;will-change:transform,opacity}
+@keyframes float{0%{transform:translate3d(0,0,0);opacity:0}15%{opacity:.7}85%{opacity:.45}100%{transform:translate3d(var(--x),-160px,0);opacity:0}}
+
+.hero-copy{grid-column:1;position:relative;z-index:2;max-width:36rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.92rem;font-weight:500;color:var(--gold-2)}
+.eyebrow::before{content:"";width:30px;height:1px;background:currentColor;opacity:.8}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.5rem,5.8vw,5.2rem);line-height:1.18;margin:1.1rem 0 1.3rem}
+.h1-line{display:block;overflow:hidden;padding-block:.04em .12em}
+.h1-line>span{display:inline-block;will-change:transform}
+.accent{background:linear-gradient(100deg,#FFE7A8 0%,#F7C45A 35%,#E8A317 65%,#C9790A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(1rem,1.25vw,1.15rem);color:var(--muted);max-width:33rem}
+.lead strong{color:var(--cream);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;margin-top:2.2rem;list-style:none;font-size:.92rem;color:var(--muted)}
+.trust li{display:flex;align-items:center;gap:.5rem}
+.trust svg{width:18px;height:18px;color:var(--gold-2);flex:none}
+.scroll-cue{position:absolute;inset:auto 0 1.4rem 0;margin:auto;width:max-content;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted)}
+.scroll-cue span{width:1px;height:38px;background:linear-gradient(var(--gold-2),transparent);transform-origin:top;animation:cue 2.2s var(--ease-out) infinite}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+.js .site-header{opacity:0;transform:translateY(-14px)}
+.js .h1-line>span{transform:translateY(115%)}
+.js .reveal{opacity:0;transform:translateY(22px)}
+.js .sr{opacity:0;transform:translateY(40px)}
+
+/* collections (same as the drawn prototype) */
+.collections{position:relative;padding:clamp(5rem,10vw,8rem) clamp(1.25rem,6vw,5.5rem);background:linear-gradient(180deg,var(--bg),var(--bg-2))}
+.sec-head{max-width:40rem;margin-bottom:3.2rem}
+.sec-head h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);line-height:1.2;margin:.6rem 0 .8rem}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}
+.card{position:relative;padding:2rem 1.8rem 1.8rem;border-radius:22px;background:linear-gradient(180deg,rgba(247,235,211,.05),rgba(247,235,211,.015));border:1px solid var(--line);overflow:hidden;
+  transition:transform .5s var(--ease-out),border-color .4s,box-shadow .5s var(--ease-out)}
+.card::before{content:"";position:absolute;inset:-40% -20% auto auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(var(--tone),transparent 65%);opacity:.18;transition:opacity .5s}
+.card:hover{transform:translateY(-6px);border-color:rgba(247,196,90,.35);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.card:hover::before{opacity:.32}
+.card-art{width:84px;height:96px;margin-bottom:1.6rem;transition:transform .6s var(--ease-out)}
+.card:hover .card-art{transform:rotate(-8deg) scale(1.05)}
+.card h3{font-family:var(--font-display);font-size:1.6rem;line-height:1.3;margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.97rem;min-height:3.4em}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.price{font-size:.95rem;color:var(--muted)}
+.price b{color:var(--gold-2);font-weight:600;font-size:1.1rem}
+.card-link{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;font-weight:600;font-size:.95rem}
+.card-link svg{width:18px;height:18px;transition:transform .35s var(--ease-out)}
+.card:hover .card-link svg{transform:translateX(-4px)}
+.site-foot{padding:2.5rem 1.25rem;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);background:var(--bg-2)}
+
+/* mobile: video on top, copy underneath */
+@media (max-width:900px){
+  .nav,.header-actions .btn{display:none}
+  .icon-btn{display:grid}
+  .hero{grid-template-columns:1fr;align-content:end;text-align:center;padding:0 1.25rem 1.75rem;min-height:0;height:100svh}
+  .hero-media{inset:0 0 auto 0;height:62svh;background-image:url("media/scroll-poster-mobile.jpg");background-position:center 30%}
+  .hero-media::after{content:"";position:absolute;inset:0;background:
+    linear-gradient(to top, var(--bg) 0%, rgba(20,11,5,.88) 16%, rgba(20,11,5,.35) 34%, rgba(20,11,5,0) 52%),
+    linear-gradient(to bottom, rgba(20,11,5,.65) 0%, rgba(20,11,5,0) 16%)}
+  .hero-shade{display:none}
+  .hero-copy{grid-column:auto;margin-inline:auto}
+  .hero h1{margin:.5rem 0 .7rem}
+  .lead{margin-inline:auto;font-size:.98rem}
+  .actions{justify-content:center;flex-wrap:nowrap;gap:.6rem;margin-top:1.4rem}
+  .actions .btn{flex:1 1 0;min-width:0;padding:0 .9rem;font-size:.93rem}
+  .trust{display:none}
+  .cards{grid-template-columns:1fr}
+  .scroll-cue{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .pollen,.scroll-cue span{display:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#top" aria-label="مملكة النحل، الصفحة الرئيسية">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <path d="M20 2.5 35.2 11.25v17.5L20 37.5 4.8 28.75v-17.5Z" fill="none" stroke="#F7C45A" stroke-width="1.6"/>
+      <path d="M20 9.5 29.1 14.75v10.5L20 30.5l-9.1-5.25v-10.5Z" fill="#E8A317"/>
+      <path d="M15.5 17.5h9M15 21h10M15.5 24.5h9" stroke="#2A1606" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <span>مملكة النحل</span>
+  </a>
+  <nav class="nav" aria-label="القائمة الرئيسية">
+    <a href="#honey">العسل</a><a href="#honey">منتجات الخلية</a><a href="#honey">الضمان</a><a href="#honey">موسوعة العسل</a>
+  </nav>
+  <div class="header-actions">
+    <a class="btn btn-ghost btn-sm" href="#" data-wa>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.85 2.03 4.75 4.75 0 0 0 1 2.53 10.9 10.9 0 0 0 4.18 3.69c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.1-.22-.17-.47-.29Z"/></svg>
+      اطلب على واتساب
+    </a>
+    <button class="icon-btn" type="button" aria-label="فتح القائمة">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M10 17h10"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero" aria-labelledby="heroTitle">
+  <div class="hero-media" aria-hidden="true">
+    <div class="zoom" id="heroZoom">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="pollen" id="pollen" aria-hidden="true"></div>
+
+  <div class="hero-copy" id="heroCopy">
+    <p class="eyebrow reveal">أكثر من ٣٠ سنة · أبو النمرس، الجيزة</p>
+    <h1 id="heroTitle">
+      <span class="h1-line"><span>عسلٌ كما</span></span>
+      <span class="h1-line"><span class="accent">صنعته النحلة</span></span>
+    </h1>
+    <p class="lead reveal">سدر جبلي، مانوكا، وعسل مصري بجودة التصدير. وكل برطمان معاه <strong>ضمان ذهبي</strong>: لو التحليل المعملي أثبت إنه مش طبيعي، فلوسك ترجعلك كاملة.</p>
+    <div class="actions reveal">
+      <a class="btn btn-primary" href="#honey">تصفّح العسل
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+      <a class="btn btn-ghost" href="#" data-wa>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.85 2.03 4.75 4.75 0 0 0 1 2.53 10.9 10.9 0 0 0 4.18 3.69c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.1-.22-.17-.47-.29Z"/></svg>
+        اطلب على واتساب</a>
+    </div>
+    <ul class="trust reveal">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12.2 2.2 2.2 4.4-4.6"/></svg>ضمان التحليل المعملي</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>توصيل القاهرة والجيزة</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19.8 7.5v9L12 21l-7.8-4.5v-9Z"/><path d="M12 8v4l2.5 1.5"/></svg>خبرة +٣٠ سنة</li>
+    </ul>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">اسحب لتحت<span></span></div>
+</section>
+
+<section class="collections" id="honey" aria-labelledby="colTitle">
+  <header class="sec-head">
+    <p class="eyebrow sr">مجموعاتنا</p>
+    <h2 id="colTitle" class="sr">اختار عسلك</h2>
+    <p class="lead sr">من السدر الجبلي النادر لحد عسل البرسيم اللي على سفرتك كل يوم. كل نوع ليه طعمه، وكل برطمان عليه نفس الضمان.</p>
+  </header>
+  <div class="cards">
+    <article class="card sr" style="--tone:#C8700A">
+      <svg class="card-art" viewBox="0 0 84 96" aria-hidden="true"><defs><linearGradient id="c1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0A12A"/><stop offset="1" stop-color="#8A4705"/></linearGradient></defs><path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/><path d="M42 14 70 30v36L42 82 14 66V30Z" fill="url(#c1)"/><path d="M24 36 42 26" stroke="#FFF3D0" stroke-opacity=".6" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3>السدر الجبلي</h3><p>مصري، سعودي، ليبي، حضرمي يمني، دوعني وعصيمي.</p>
+      <div class="card-foot"><span class="price">يبدأ من <b>١٥٠</b> جنيه</span><a class="card-link" href="#">شوف الأنواع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+    </article>
+    <article class="card sr" style="--tone:#8A4A0A">
+      <svg class="card-art" viewBox="0 0 84 96" aria-hidden="true"><defs><linearGradient id="c2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8681A"/><stop offset="1" stop-color="#4E2603"/></linearGradient></defs><path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/><path d="M42 14 70 30v36L42 82 14 66V30Z" fill="url(#c2)"/><path d="M24 36 42 26" stroke="#FFF3D0" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3>المانوكا</h3><p>بدرجات UMF من ٥ لحد ١٨، أندر عسل في المجموعة.</p>
+      <div class="card-foot"><span class="price">يبدأ من <b>١٥٠٠</b> جنيه</span><a class="card-link" href="#">شوف الأنواع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+    </article>
+    <article class="card sr" style="--tone:#F5B21A">
+      <svg class="card-art" viewBox="0 0 84 96" aria-hidden="true"><defs><linearGradient id="c3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD66E"/><stop offset="1" stop-color="#D48A0E"/></linearGradient></defs><path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/><path d="M42 14 70 30v36L42 82 14 66V30Z" fill="url(#c3)"/><path d="M24 36 42 26" stroke="#FFF8E0" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3>عسل التصدير</h3><p>برسيم، موالح، بردقوش، حبة البركة وصحراوي.</p>
+      <div class="card-foot"><span class="price">يبدأ من <b>٦٥</b> جنيه</span><a class="card-link" href="#">شوف الأنواع <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+    </article>
+  </div>
+</section>
+</main>
+<footer class="site-foot">نموذج تجريبي للهيرو بالسكرول، مش الموقع النهائي.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const conn = navigator.connection || {};
+  const lowData = conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+  const hasGsap = !!(window.gsap && window.ScrollTrigger);
+  if (!hasGsap) root.classList.remove('js');
+
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // ---------- frame sequence on a canvas, driven by scroll ----------
+  // Poster only (no sequence, no pinning) for reduced motion, data saver, or if GSAP failed to load.
+  if (reduce || lowData || !hasGsap) return;
+
+  const FRAMES = 64;
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const mobileMQ = matchMedia('(max-width: 900px)');
+  const pad = (i) => String(i + 1).padStart(3, '0');
+  let dir = '', imgs = [], cur = 0, target = 0, drawn = null, raf = 0;
+
+  function nearest(i) {
+    for (let d = 0; d < FRAMES; d++) {
+      const a = imgs[i - d], b = imgs[i + d];
+      if (a && a.ok) return a;
+      if (b && b.ok) return b;
+    }
+    return null;
+  }
+  function draw() {
+    const im = nearest(Math.round(cur));
+    if (!im || im === drawn) return;
+    drawn = im;
+    const cw = canvas.width, ch = canvas.height, iw = im.naturalWidth, ih = im.naturalHeight;
+    const s = Math.max(cw / iw, ch / ih), dw = iw * s, dh = ih * s;
+    const fx = mobileMQ.matches ? 0.5 : 0, fy = mobileMQ.matches ? 0.3 : 0.5; // same focal point as the poster
+    ctx.drawImage(im, (cw - dw) * fx, (ch - dh) * fy, dw, dh);
+    canvas.classList.add('ready');
+  }
+  function loadOne(i) {
+    if (imgs[i]) return;
+    const im = new Image();
+    im.decoding = 'async';
+    im.onload = () => { im.ok = true; if (Math.abs(i - cur) < 4) { drawn = null; draw(); } };
+    im.src = dir + pad(i) + '.webp';
+    imgs[i] = im;
+  }
+  function loadSet() {
+    dir = mobileMQ.matches ? 'media/seq/m/' : 'media/seq/d/';
+    imgs = new Array(FRAMES); drawn = null;
+    // coarse-to-fine: a usable scrub arrives early, detail fills in after
+    for (const step of [16, 8, 4, 2, 1]) for (let i = 0; i < FRAMES; i += step) loadOne(i);
+  }
+  function sizeCanvas() {
+    const r = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = Math.round(r.width * dpr);
+    canvas.height = Math.round(r.height * dpr);
+    drawn = null; draw();
+  }
+  function tick() {
+    cur += (target - cur) * 0.18;               // ease toward the scroll position
+    if (Math.abs(target - cur) < 0.02) cur = target;
+    draw();
+    raf = cur !== target ? requestAnimationFrame(tick) : 0;
+  }
+  const setProgress = (p) => { target = p * (FRAMES - 1); if (!raf) raf = requestAnimationFrame(tick); };
+
+  loadSet(); sizeCanvas();
+  let rT; addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(sizeCanvas, 120); });
+  mobileMQ.addEventListener('change', () => { loadSet(); sizeCanvas(); });
+
+  // pollen drifting over the footage
+  const pollen = document.getElementById('pollen');
+  const count = innerWidth < 700 ? 7 : 12;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('i');
+    p.style.cssText = `left:${(Math.random()*100).toFixed(1)}%;top:${(35+Math.random()*60).toFixed(1)}%;--s:${(1.5+Math.random()*2.2).toFixed(1)}px;--d:${(9+Math.random()*9).toFixed(1)}s;--dl:-${(Math.random()*12).toFixed(1)}s;--x:${(Math.random()*60-30).toFixed(0)}px`;
+    pollen.appendChild(p);
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  gsap.timeline({ delay: 0.1 })
+    .fromTo('#heroZoom', { scale: 1.06 }, { scale: 1, duration: 2.4, ease: 'power2.out' }, 0)
+    .to('#siteHeader', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.2)
+    .to('.h1-line>span', { y: 0, duration: 1.2, ease: 'power4.out', stagger: 0.13 }, 0.45)
+    .to('.reveal', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.09 }, 0.7);
+
+  // hold the hero in place while the honey pours with the scroll, then release it
+  // no pinning: the page scrolls normally and the honey pours as the hero moves up.
+  // HOLD keeps the drop still for the first bit of scroll; the pour finishes at DONE,
+  // while the footage drifts down (parallax) so the jar stays in view longer.
+  // on phones the footage only fills the top of the screen and leaves view sooner, so the pour ends earlier
+  const HOLD = 0.06;
+  ScrollTrigger.create({
+    trigger: '#hero', start: 'top top', end: 'bottom top',
+    onUpdate: (self) => {
+      const DONE = mobileMQ.matches ? 0.4 : 0.7;
+      setProgress(Math.min(1, Math.max(0, (self.progress - HOLD) / (DONE - HOLD))));
+    }
+  });
+  const st = { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true };
+  gsap.to('.hero-media', { yPercent: 45, ease: 'none', scrollTrigger: st });
+  gsap.to('#heroCopy', { y: -60, opacity: 0, ease: 'none', scrollTrigger: { ...st, end: '60% top' } });
+  gsap.to('.scroll-cue', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=12%', scrub: true } });
+  window.__seq = { setProgress, get cur() { return cur; }, imgs: () => imgs }; // spike-only debug hook
+
+  ScrollTrigger.batch('.sr', { start: 'top 86%', once: true,
+    onEnter: (b) => gsap.to(b, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }) });
+})();
+</script>
+</body>
+</html>
