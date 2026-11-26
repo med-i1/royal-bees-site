@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { whatsappUrl } from '../lib/order';
+const hello = whatsappUrl(`السلام عليكم، عندي استفسار عن منتجات ${SITE.name}.`);
+const map = `https://www.google.com/maps?q=${encodeURIComponent('أبو النمرس، الجيزة')}&output=embed`;
+---
+<Base title="تواصل معنا" description={`تواصل مع مملكة النحل: ${SITE.phone}، ${SITE.email}، ${SITE.address}.`}>
+  <section class="contact">
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">تواصل معنا</li></ol>
+    <h1>تواصل معنا</h1>
+    <ul class="ways">
+      <li><span>واتساب</span><a href={hello} target="_blank" rel="noopener">ابعتلنا رسالة</a></li>
+      <li><span>تليفون</span><a href={`tel:${SITE.phone}`}>{SITE.phone}</a></li>
+      <li><span>إيميل</span><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li><span>العنوان</span><p>{SITE.address}</p></li>
+      <li><span>التوصيل</span><p>{SITE.delivery}</p></li>
+    </ul>
+    <iframe class="map" title="خريطة أبو النمرس، الجيزة" src={map} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+</Base>
+<style>
+  .contact{padding:2.5rem var(--pad-x) 5rem;display:grid;gap:1.6rem;max-width:72rem;margin:0 auto}
+  h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem)}
+  .ways{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+  .ways li{border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.2rem;display:grid;gap:.3rem}
+  .ways span{color:var(--muted);font-size:.9rem} .ways a{color:var(--gold-2);font-weight:600;min-height:44px;display:flex;align-items:center}
+  .map{width:100%;height:360px;border:0;border-radius:20px;filter:grayscale(.3) contrast(1.05)}
+</style>

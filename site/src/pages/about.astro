@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { arDigits } from '../lib/format';
+---
+<Base title="عن مملكة النحل" description={`مملكة النحل: عسل طبيعي منذ ${SITE.founded} في ${SITE.address}، بضمان التحليل المعملي.`}>
+  <section class="about">
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">عن مملكة النحل</li></ol>
+    <p class="eyebrow">منذ {arDigits(SITE.founded)}</p>
+    <h1>عسل نعرفه كويس، <span class="accent">من سنة {arDigits(SITE.founded)}</span></h1>
+    <p class="lead">من {SITE.address}، مملكة النحل بتقدم عسل السدر الجبلي والمانوكا وعسل التصدير المصري ومنتجات الخلية.</p>
+    <p class="lead">وعشان إحنا واثقين من اللي بنبيعه، كل برطمان عليه <a href="/guarantee/">الضمان الذهبي</a>: لو التحليل المعملي أثبت إن العسل مش طبيعي، فلوسك ترجعلك كاملة.</p>
+    <div class="row"><a class="btn btn-primary" href="/honey/">تصفّح العسل</a><a class="btn btn-ghost" href="/contact/">تواصل معانا</a></div>
+  </section>
+</Base>
+<style>
+  .about{max-width:48rem;margin:0 auto;padding:2.5rem var(--pad-x) 5rem}
+  h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.25;margin:.6rem 0 1.4rem}
+  .lead{margin-bottom:1rem;max-width:none} .lead a{color:var(--gold-2);text-decoration:underline}
+  .row{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+</style>

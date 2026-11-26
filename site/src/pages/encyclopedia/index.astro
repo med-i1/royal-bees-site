@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('encyclopedia')).sort((a, b) => +b.data.date - +a.data.date);
+---
+<Base title="موسوعة عسل النحل" description="مقالات من مملكة النحل عن أنواع العسل، وإزاي تفرّق الأصلي من المغشوش.">
+  <header class="page-head">
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">موسوعة العسل</li></ol>
+    <h1>موسوعة عسل النحل</h1>
+    <p class="lead">اعرف عسلك أكتر: أنواعه، وإزاي تختاره، وإزاي تفرّق الأصلي من المغشوش.</p>
+  </header>
+  <section class="posts">
+    {posts.map((p) => (
+      <article class="post" data-article-card data-reveal>
+        {p.data.cover && <div class="post-img"><img src={p.data.cover} alt="" width="800" height="800" loading="lazy" /></div>}
+        <div class="post-body">
+          <h2><a href={`/encyclopedia/${p.id}/`}>{p.data.title}</a></h2>
+          <p>{p.data.description}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</Base>
+<style>
+  .posts{padding:0 var(--pad-x) 5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+  .post{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:rgba(247,235,211,.03)}
+  .post-img{aspect-ratio:16/10;background:#F4EEE3;padding:6%} .post-img img{width:100%;height:100%;object-fit:contain}
+  .post-body{padding:1.2rem 1.3rem 1.4rem}
+  .post h2{font-family:var(--font-display);font-size:1.35rem;line-height:1.4;margin-bottom:.4rem}
+  .post h2 a:hover{color:var(--gold-2)} .post p{color:var(--muted);font-size:.95rem}
+</style>

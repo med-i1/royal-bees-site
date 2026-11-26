@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="الضمان الذهبي" description="ضمان مملكة النحل: لو التحليل المعملي أثبت إن العسل غير طبيعي، فلوسك ترجعلك كاملة.">
+  <section class="g-page">
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">الضمان الذهبي</li></ol>
+    <p class="eyebrow">الضمان الذهبي</p>
+    <h1>تحليل معملي… <span class="accent">أو فلوسك ترجعلك كاملة</span></h1>
+    <blockquote>«إذا ثبت بالتحليل المخبري أن العسل غير طبيعي يحق للعميل استرجاع حقه كاملا»</blockquote>
+    <h2>إزاي يشتغل الضمان؟</h2>
+    <ol class="steps">
+      <li><b>اشتري عسلك</b> من مملكة النحل واحتفظ بالبرطمان.</li>
+      <li><b>حلّله في أي معمل معتمد</b> تختاره إنت.</li>
+      <li><b>لو التحليل أثبت إنه مش طبيعي</b>، تواصل معانا بنتيجة التحليل وبنرجعلك تمنه كامل.</li>
+    </ol>
+    <p class="lead">عندك سؤال عن الضمان؟ <a href="/contact/">تواصل معانا</a>.</p>
+    <a class="btn btn-primary" href="/honey/">اختار عسلك</a>
+  </section>
+</Base>
+<style>
+  .g-page{max-width:48rem;margin:0 auto;padding:2.5rem var(--pad-x) 5rem}
+  h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.25;margin:.6rem 0 1.6rem}
+  blockquote{font-family:var(--font-display);font-size:1.4rem;line-height:1.7;padding:1.4rem 1.6rem;border-inline-start:3px solid var(--gold);background:rgba(247,196,90,.06);border-radius:14px}
+  h2{font-family:var(--font-display);font-size:1.6rem;margin:2.4rem 0 1rem;color:var(--gold-2)}
+  .steps{display:grid;gap:.8rem;padding-inline-start:1.4rem;margin-bottom:2rem}
+  .steps li{line-height:1.9} .lead{margin-bottom:1.6rem} .lead a{color:var(--gold-2);text-decoration:underline}
+</style>
