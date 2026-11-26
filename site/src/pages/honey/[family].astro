@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { FAMILIES, byFamily, type FamilyId } from '../../data/products';
+
+export function getStaticPaths() {
+  return FAMILIES.map((f) => ({ params: { family: f.id } }));
+}
+const id = Astro.params.family as FamilyId;
+const fam = FAMILIES.find((f) => f.id === id)!;
+const items = byFamily(id);
+---
+<Base title={fam.name} description={`${fam.name} من مملكة النحل: ${fam.blurb} بضمان التحليل المعملي.`}>
+  <header class="page-head" style={`--tone:${fam.tone}`}>
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href="/honey/">كل العسل</a></li><li aria-current="page">{fam.name}</li></ol>
+    <h1>{fam.name}</h1>
+    <p class="lead">{fam.blurb}</p>
+  </header>
+  <nav class="fam-nav chip-row" aria-label="عائلات المنتجات">
+    {FAMILIES.map((f) => <a class="chip" href={`/honey/${f.id}/`} aria-current={f.id === id ? 'page' : undefined}>{f.name}</a>)}
+  </nav>
+  <section class="catalog-wrap"><div class="catalog-grid" data-family-grid>{items.map((p) => <ProductCard product={p} />)}</div></section>
+</Base>
+<style>
+  .fam-nav{padding:0 var(--pad-x) 1.8rem}
+  .catalog-wrap{padding:0 var(--pad-x) 5rem}
+</style>

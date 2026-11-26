@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { FAMILIES, PRODUCTS } from '../../data/products';
+---
+<Base title="كل العسل" description="كتالوج مملكة النحل: سدر جبلي، مانوكا، عسل التصدير، زيرو سكروز، منتجات الخلية والمكسرات، بالأحجام والأسعار.">
+  <header class="page-head">
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">كل العسل</li></ol>
+    <h1>كل العسل</h1>
+    <p class="lead">اختار العائلة، ورتّب بالسعر، وضيف اللي يعجبك لطلبك.</p>
+  </header>
+  <section class="catalog-tools" aria-label="فلترة وترتيب">
+    <div class="chip-row" role="group" aria-label="العائلة">
+      <button type="button" class="chip" data-family="" aria-pressed="true">الكل</button>
+      {FAMILIES.map((f) => <button type="button" class="chip" data-family={f.id} aria-pressed="false">{f.name}</button>)}
+    </div>
+    <label class="sort">ترتيب
+      <select data-sort>
+        <option value="">الافتراضي</option>
+        <option value="price-asc">السعر: من الأقل</option>
+        <option value="price-desc">السعر: من الأعلى</option>
+      </select>
+    </label>
+  </section>
+  <section class="catalog-wrap">
+    <p class="count" data-count-label aria-live="polite"></p>
+    <div class="catalog-grid" data-catalog>{PRODUCTS.map((p) => <ProductCard product={p} reveal={false} />)}</div>
+  </section>
+</Base>
+<script>import '../../scripts/catalog-filter';</script>
+<style>
+  .catalog-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;padding:0 var(--pad-x) 1.5rem}
+  .sort{display:flex;align-items:center;gap:.6rem;color:var(--muted)}
+  .sort select{min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg-2);color:var(--cream);padding:0 .8rem;font:inherit}
+  .catalog-wrap{padding:0 var(--pad-x) 5rem}
+  .count{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+</style>
