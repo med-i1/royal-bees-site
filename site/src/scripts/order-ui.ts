@@ -43,7 +43,7 @@ function render() {
 function updateLink() {
   const send = $<HTMLAnchorElement>('[data-order-send]');
   if (!send) return;
-  if (!lines.length) { send.removeAttribute('href'); send.setAttribute('aria-disabled', 'true'); return; }
+  if (!lines.length) { send.href = whatsappUrl(''); send.setAttribute('aria-disabled', 'true'); return; }
   const name = $<HTMLInputElement>('[data-order-name]')?.value;
   const area = $<HTMLInputElement>('[data-order-area]')?.value;
   send.href = whatsappUrl(buildMessage(lines, { name, area }));

@@ -31,8 +31,8 @@ test('poster stays when frames fail to load', async ({ page }) => {
 
 test('story still works after navigating away and back', async ({ page }) => {
   await page.goto('/');
-  await page.goto('/dev/order-fixture/');
-  await page.getByRole('link', { name: 'إلى الرئيسية' }).click();
+  await page.goto('/product/sidr-doani/');
+  await page.locator('.crumbs').getByRole('link', { name: 'الرئيسية' }).click();
   await expect(page).toHaveURL(/:4321\/$/);
   await page.evaluate(() => window.scrollTo(0, innerHeight * 0.6));
   await expect.poll(async () => Number(await page.locator('.beat-2').evaluate((e) => getComputedStyle(e).opacity))).toBeGreaterThan(0.9);

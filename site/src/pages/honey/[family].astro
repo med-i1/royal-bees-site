@@ -22,7 +22,7 @@ const items = byFamily(id);
   <nav class="fam-nav chip-row" aria-label="عائلات المنتجات">
     {FAMILIES.map((f) => <a class="chip" href={`/honey/${f.id}/`} aria-current={f.id === id ? 'page' : undefined}>{f.name}</a>)}
   </nav>
-  <section class="catalog-wrap"><div class="catalog-grid" data-family-grid>{items.map((p) => <ProductCard product={p} />)}</div></section>
+  <section class="catalog-wrap"><h2 class="sr-only">منتجات {fam.name}</h2><div class="catalog-grid" data-family-grid>{items.map((p) => <ProductCard product={p} />)}</div></section>
 </Base>
 <style>
   .fam-nav{padding:0 var(--pad-x) 1.8rem}

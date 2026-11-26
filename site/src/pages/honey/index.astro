@@ -23,6 +23,7 @@ import { FAMILIES, PRODUCTS } from '../../data/products';
     </label>
   </section>
   <section class="catalog-wrap">
+    <h2 class="sr-only">المنتجات</h2>
     <p class="count" data-count-label aria-live="polite"></p>
     <div class="catalog-grid" data-catalog>{PRODUCTS.map((p) => <ProductCard product={p} reveal={false} />)}</div>
   </section>

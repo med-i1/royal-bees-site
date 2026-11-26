@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const FIXTURE = '/dev/order-fixture/';
+const FIXTURE = '/product/sidr-doani/';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(FIXTURE);
@@ -37,10 +37,10 @@ test('order survives reload and navigation back', async ({ page }) => {
   await add.click();
   await page.reload();
   await expect(page.locator('[data-order-count]')).toHaveText('٢');
-  await page.getByRole('link', { name: 'إلى الرئيسية' }).click();
+  await page.locator('.crumbs').getByRole('link', { name: 'الرئيسية' }).click();
   await expect(page).toHaveURL(/:4321\/$/);
   await page.goBack();
-  await expect(page).toHaveURL(/order-fixture/);
+  await expect(page).toHaveURL(/sidr-doani/);
   await page.locator('[data-add-order]').first().click();
   await expect(page.locator('[data-order-count]')).toHaveText('٣');
 });

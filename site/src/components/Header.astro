@@ -6,7 +6,7 @@ import { NAV } from '../data/nav';
 const hello = whatsappUrl(`السلام عليكم، عندي استفسار عن منتجات ${SITE.name}.`);
 ---
 <header class="site-header" data-site-header>
-  <a class="brand" href="/" aria-label={`${SITE.name}، الصفحة الرئيسية`}><Logo size={40} withWordmark /></a>
+  <a class="brand" href="/"><Logo size={40} withWordmark /></a>
   <nav class="nav" aria-label="القائمة الرئيسية">
     {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
   </nav>
@@ -28,7 +28,7 @@ const hello = whatsappUrl(`السلام عليكم، عندي استفسار ع�
 <style>
   .site-header{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem clamp(1rem,4vw,3rem);
     border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
-  .site-header.scrolled{background:rgba(20,11,5,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+  .site-header.scrolled{background:rgba(20,11,5,.96);border-color:var(--line)}
   .nav{display:flex;gap:2.2rem;font-size:.95rem;color:var(--muted)}
   .nav a{position:relative;padding:.6rem 0;transition:color .25s}
   .nav a:hover,.nav a[aria-current="page"]{color:var(--cream)}
