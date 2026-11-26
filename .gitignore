@@ -5,3 +5,6 @@ spike/media/
 *.log
 test-results/
 playwright-report/
+site/test-results/
+site/playwright-report/
+.superpowers/

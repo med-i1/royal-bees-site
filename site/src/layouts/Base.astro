@@ -1,0 +1,44 @@
+---
+import '@fontsource/el-messiri/arabic-500.css';
+import '@fontsource/el-messiri/arabic-700.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import Logo from '../components/Logo.astro';
+import { SITE } from '../config';
+
+interface Props { title: string; description: string; image?: string; noindex?: boolean }
+const { title, description, image = '/og-default.jpg', noindex = false } = Astro.props;
+const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#140B05" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header-min"><a href="/" aria-label={`${SITE.name}، الصفحة الرئيسية`}><Logo size={40} withWordmark /></a></header>
+    <main id="main"><slot /></main>
+  </body>
+</html>
+
+<style>
+  .site-header-min{padding:.85rem var(--pad-x)}
+</style>

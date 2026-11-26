@@ -1,0 +1,9 @@
+:root{
+  --bg:#140B05; --bg-2:#1C1008;
+  --gold:#E8A317; --gold-2:#F7C45A;
+  --cream:#F7EBD3; --muted:#CDB99C; --line:rgba(247,235,211,.12);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --font-display:"El Messiri","Times New Roman",serif;
+  --font-body:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  --pad-x:clamp(1.25rem,6vw,5.5rem);
+}
