@@ -1,0 +1,19 @@
+{
+  "base": "https://admin.royalbeeseg.com/public/storage/uploads/",
+  "images": {
+    "sidr-egyptian": "1654459430.jpeg", "sidr-wild": "1654459749.jpeg", "sidr-saudi": "1654457783.jpeg",
+    "sidr-libyan": "1654459857.jpeg", "sidr-murr-hanoun": "1654458520.jpeg", "sidr-thyme": "1654459469.jpeg",
+    "sidr-hadrami": "1654458564.jpeg", "sidr-doani": "1652941826_6285e40268e5a.png", "sidr-osaimi": "1652942368_6285e620bde08.png",
+    "mountain-egyptian-clips": "1654458386.jpeg", "mountain-wild-clips": "1654459361.jpeg", "mountain-saudi-clips": "1654459209.jpeg",
+    "mountain-murr-hanoun-clips": "1654459313.jpeg",
+    "manuka-umf-10": "1653142709.jpg", "manuka-umf-18": "1653208184.JPG",
+    "clover-export": "1656008925.jpeg", "citrus-export": "1656008716.jpeg", "black-seed-export": "1656008459.jpeg",
+    "desert-export": "1656009022.jpeg", "marjoram-export": "1656009214.jpeg", "medicinal-plants-export": "1656009507.jpeg",
+    "baladi-export": "1656009327.jpeg",
+    "clover-zero": "1652942524_6285e6bc95e17.png", "citrus-zero": "1652942559_6285e6df959a1.png", "marjoram-zero": "1652942589_6285e6fdc6461.png",
+    "black-seed-zero": "1652942624_6285e7204f148.png", "desert-zero": "1652942670_6285e74ef2409.png", "medicinal-plants-zero": "1652942728_6285e788ba2dc.png",
+    "baladi-zero": "1652942839_6285e7f72cabe.png", "comb-zero": "1652943036_6285e8bcf2988.png",
+    "royal-jelly-baladi": "1652943389_6285ea1d7df5c.png", "bee-pollen": "1652943290_6285e9bab49e0.png", "propolis": "1652942923_6285e84bbd46b.png",
+    "palm-pollen": "1652943823.jpeg", "ginseng-red": "1652943736.jpeg", "honey-nuts": "1652941456_6285e290bcc6e.png"
+  }
+}
