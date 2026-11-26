@@ -44,3 +44,12 @@ test('order survives reload and navigation back', async ({ page }) => {
   await page.locator('[data-add-order]').first().click();
   await expect(page.locator('[data-order-count]')).toHaveText('٣');
 });
+
+test('keyboard focus stays inside the open order drawer', async ({ page }) => {
+  await page.locator('[data-add-order]').first().click();
+  await page.locator('[data-order-open]').click();
+  for (let i = 0; i < 25; i++) {
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => !!document.activeElement?.closest('#order-drawer'))).toBe(true);
+  }
+});

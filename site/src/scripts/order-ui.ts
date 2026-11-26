@@ -127,7 +127,18 @@ function init() {
   document.addEventListener('input', (e) => {
     if ((e.target as HTMLElement).matches('[data-order-name],[data-order-area]')) updateLink();
   }, { signal });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); }, { signal });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { close(); return; }
+    const d = $<HTMLElement>('#order-drawer');
+    if (e.key !== 'Tab' || !d || d.hidden) return;
+    // keep keyboard focus inside the open dialog
+    const items = [...d.querySelectorAll<HTMLElement>('a[href]:not([aria-disabled="true"]),button,input')].filter((el) => !el.hidden && el.offsetParent !== null);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    const inside = d.contains(document.activeElement);
+    if (e.shiftKey && (document.activeElement === first || !inside)) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (document.activeElement === last || !inside)) { e.preventDefault(); first.focus(); }
+  }, { signal });
 }
 
 document.addEventListener('astro:page-load', init);

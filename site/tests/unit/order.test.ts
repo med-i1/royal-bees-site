@@ -85,3 +85,16 @@ describe('order list', () => {
     expect(whatsappUrl('x', '201000000000')).toBe('https://wa.me/201000000000?text=x');
   });
 });
+
+describe('order storage when the browser blocks storage access', () => {
+  it('does not throw when reading localStorage itself throws', () => {
+    const desc = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
+    Object.defineProperty(globalThis, 'localStorage', { configurable: true, get() { throw new Error('SecurityError'); } });
+    try {
+      expect(loadOrder()).toEqual([]);
+      expect(() => saveOrder([])).not.toThrow();
+    } finally {
+      if (desc) Object.defineProperty(globalThis, 'localStorage', desc); else delete (globalThis as { localStorage?: Storage }).localStorage;
+    }
+  });
+});

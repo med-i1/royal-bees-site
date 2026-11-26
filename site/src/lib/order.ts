@@ -39,8 +39,13 @@ function isLine(x: unknown): x is OrderLine {
     && Number.isFinite(l.unitPrice) && Number.isInteger(l.qty) && l.qty > 0;
 }
 
+/** localStorage, or undefined when the browser blocks access to it (cookies disabled, sandboxed frames). */
+function defaultStorage(): Storage | undefined {
+  try { return globalThis.localStorage; } catch { return undefined; }
+}
+
 /** Reads the saved order; any storage error or malformed data yields an empty order. */
-export function loadOrder(storage: Storage | undefined = globalThis.localStorage): OrderLine[] {
+export function loadOrder(storage: Storage | undefined = defaultStorage()): OrderLine[] {
   try {
     const raw = storage?.getItem(STORAGE_KEY);
     if (!raw) return [];
@@ -52,7 +57,7 @@ export function loadOrder(storage: Storage | undefined = globalThis.localStorage
 }
 
 /** Saves the order; storage failures (private mode, quota) are ignored so the page keeps working. */
-export function saveOrder(lines: OrderLine[], storage: Storage | undefined = globalThis.localStorage): void {
+export function saveOrder(lines: OrderLine[], storage: Storage | undefined = defaultStorage()): void {
   try {
     storage?.setItem(STORAGE_KEY, JSON.stringify(lines));
   } catch {
