@@ -37,3 +37,18 @@ test('story still works after navigating away and back', async ({ page }) => {
   await page.evaluate(() => window.scrollTo(0, innerHeight * 0.6));
   await expect.poll(async () => Number(await page.locator('.beat-2').evaluate((e) => getComputedStyle(e).opacity))).toBeGreaterThan(0.9);
 });
+
+test('headline marks are not clipped', async ({ browser }, info) => {
+  // static hero (reduced motion): the only difference between the two shots can be what overflow hides
+  const ctx = await browser.newContext({ ...info.project.use, reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  await page.goto('http://localhost:4321/');
+  await page.evaluate(() => document.fonts.ready);
+  const box = (await page.locator('#heroTitle').boundingBox())!;
+  const clip = { x: box.x, y: box.y - 30, width: box.width, height: box.height + 60 };
+  const clipped = await page.screenshot({ clip });
+  await page.addStyleTag({ content: '.h1-line{overflow:visible !important}' });
+  const unclipped = await page.screenshot({ clip });
+  expect(clipped.equals(unclipped)).toBe(true);
+  await ctx.close();
+});
