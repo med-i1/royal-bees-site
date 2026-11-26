@@ -1,0 +1,31 @@
+---
+import { PRODUCTS, type Tag } from '../../data/products';
+import ProductCard from '../ProductCard.astro';
+const CHIPS: { tag: Tag; label: string }[] = [
+  { tag: 'light', label: 'طعم خفيف للفطار' },
+  { tag: 'strong', label: 'طعم قوي' },
+  { tag: 'gift', label: 'هدية فاخرة' },
+  { tag: 'no-sucrose', label: 'من غير سكروز' },
+  { tag: 'wholesale', label: 'للكميات (جركن ٥ كيلو)' },
+];
+const items = PRODUCTS.filter((p) => p.tags?.length);
+---
+<section class="section chooser" id="chooser" aria-labelledby="chTitle">
+  <header class="sec-head">
+    <p class="eyebrow" data-reveal>محتار؟</p>
+    <h2 class="h2" id="chTitle" data-reveal>إزاي تختار عسلك</h2>
+    <p class="lead" data-reveal>قولنا بتدور على إيه، وإحنا نرشحلك.</p>
+  </header>
+  <div class="chips" role="group" aria-label="اختار حسب الطعم والاستخدام">
+    {CHIPS.map((c, i) => <button type="button" class="chip" data-tag={c.tag} aria-pressed={i === 0 ? 'true' : 'false'}>{c.label}</button>)}
+  </div>
+  <div class="ch-grid" data-chooser-grid>{items.map((p) => <ProductCard product={p} reveal={false} />)}</div>
+</section>
+<style>
+  .sec-head{max-width:40rem;margin-bottom:2rem}
+  .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}
+  .chip{min-height:44px;padding:0 1.1rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:background-color .3s,color .3s,border-color .3s}
+  .chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#2A1606;font-weight:600}
+  .ch-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+  @media (max-width:900px){ .ch-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem} }
+</style>

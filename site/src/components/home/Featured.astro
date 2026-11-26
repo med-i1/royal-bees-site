@@ -1,0 +1,22 @@
+---
+import { PRODUCTS } from '../../data/products';
+import ProductCard from '../ProductCard.astro';
+const items = PRODUCTS.filter((p) => p.featured);
+---
+<section class="section featured" id="featured" aria-labelledby="featTitle">
+  <header class="sec-head">
+    <p class="eyebrow" data-reveal>الأكثر طلبًا</p>
+    <h2 class="h2" id="featTitle" data-reveal>من أول برطمان، هتعرف الفرق</h2>
+  </header>
+  <div class="feat-track">{items.map((p) => <ProductCard product={p} />)}</div>
+</section>
+<style>
+  .featured{background:var(--bg-2)}
+  .sec-head{max-width:40rem;margin-bottom:2.5rem}
+  .feat-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+  @media (max-width:900px){
+    .feat-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;margin-inline:calc(var(--pad-x) * -1);padding:0 var(--pad-x) 1rem;scrollbar-width:none}
+    .feat-track::-webkit-scrollbar{display:none}
+    .feat-track > :global(*){flex:0 0 72%;scroll-snap-align:start}
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import type { Product } from '../data/products';
+import { fromPrice } from '../data/products';
+import { priceLabel } from '../lib/format';
+import AddToOrder from './AddToOrder.astro';
+interface Props { product: Product; reveal?: boolean }
+const { product, reveal = true } = Astro.props;
+const href = `/product/${product.slug}/`;
+---
+<article class="pcard" data-product-card data-tags={(product.tags ?? []).join(' ')} data-family={product.family} data-price={fromPrice(product)} data-reveal={reveal ? '' : undefined}>
+  <a class="pcard-img" href={href} tabindex="-1" aria-hidden="true">
+    <img src={product.image} alt="" width="800" height="800" loading="lazy" decoding="async" />
+  </a>
+  <div class="pcard-body">
+    <h3><a href={href}>{product.name}</a></h3>
+    <p class="pcard-price">يبدأ من <b>{priceLabel(fromPrice(product))}</b></p>
+    <AddToOrder product={product} compact />
+  </div>
+</article>
+
+<style>
+  .pcard{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,rgba(247,235,211,.05),rgba(247,235,211,.015));border:1px solid var(--line);
+    transition:border-color .4s,box-shadow .5s var(--ease-out),transform .5s var(--ease-out)}
+  .pcard-img{display:block;aspect-ratio:1;background:#F4EEE3;padding:8%}
+  .pcard-img img{width:100%;height:100%;object-fit:contain;transition:transform .7s var(--ease-out)}
+  .pcard-body{display:flex;flex-direction:column;gap:.35rem;padding:1rem 1.1rem 1.2rem;flex:1}
+  .pcard h3{font-family:var(--font-display);font-size:1.12rem;line-height:1.45}
+  .pcard-price{color:var(--muted);font-size:.92rem;margin-bottom:.4rem}
+  .pcard-price b{color:var(--gold-2);font-weight:600}
+  .pcard :global(.add-compact){margin-top:auto;align-self:flex-start}
+  @media (hover:hover){
+    .pcard:hover{transform:translateY(-6px);border-color:rgba(247,196,90,.35);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+    .pcard:hover .pcard-img img{transform:scale(1.04)}
+  }
+</style>

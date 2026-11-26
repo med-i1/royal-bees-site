@@ -1,0 +1,20 @@
+---
+import { FAQ } from '../../data/faq';
+---
+<section class="section faq" id="faq" aria-labelledby="faqTitle">
+  <h2 class="h2" id="faqTitle" data-reveal>أسئلة بتتسأل كتير</h2>
+  <div class="faq-list">
+    {FAQ.map((f) => (
+      <details data-reveal><summary>{f.q}</summary><p>{f.a}</p></details>
+    ))}
+  </div>
+</section>
+<style>
+  .faq-list{max-width:48rem;margin-top:2rem;display:grid;gap:.6rem}
+  details{border:1px solid var(--line);border-radius:16px;padding:0 1.2rem;background:rgba(247,235,211,.02)}
+  summary{min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;font-weight:600;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.4rem;color:var(--gold-2);transition:transform .3s var(--ease-out)}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);padding-bottom:1.1rem}
+</style>

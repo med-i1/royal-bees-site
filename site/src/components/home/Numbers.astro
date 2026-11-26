@@ -1,0 +1,26 @@
+---
+import { SITE } from '../../config';
+import { PRODUCTS, FAMILIES } from '../../data/products';
+import { arDigits } from '../../lib/format';
+const years = new Date().getFullYear() - SITE.founded;
+const stats = [
+  { n: years, label: 'سنة خبرة', attr: 'data-years' },
+  { n: PRODUCTS.length, label: 'منتج' },
+  { n: FAMILIES.length, label: 'عائلات عسل ومنتجات خلية' },
+];
+---
+<section class="section numbers" aria-label="مملكة النحل بالأرقام">
+  <p class="eyebrow" data-reveal>منذ {arDigits(SITE.founded)} · {SITE.address}</p>
+  <ul class="stats">
+    {stats.map((s) => (
+      <li data-reveal><b data-count={s.n} {...(s.attr ? { [s.attr]: '' } : {})}>{arDigits(s.n)}</b><span>{s.label}</span></li>
+    ))}
+  </ul>
+</section>
+<style>
+  .numbers{text-align:center;background:var(--bg-2)}
+  .stats{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+  .stats b{display:block;font-family:var(--font-display);font-size:clamp(3rem,7vw,5.5rem);line-height:1.1;color:var(--gold-2)}
+  .stats span{color:var(--muted)}
+  @media (max-width:700px){ .stats{grid-template-columns:1fr} }
+</style>

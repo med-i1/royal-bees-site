@@ -1,0 +1,43 @@
+---
+import { FAMILIES, byFamily, fromPrice } from '../../data/products';
+import { priceLabel } from '../../lib/format';
+const fams = FAMILIES.map((f) => ({ ...f, from: Math.min(...byFamily(f.id).map(fromPrice)) }));
+---
+<section class="collections section" id="collections" aria-labelledby="colTitle">
+  <header class="sec-head">
+    <p class="eyebrow" data-reveal>مجموعاتنا</p>
+    <h2 class="h2" id="colTitle" data-reveal>اختار عسلك</h2>
+    <p class="lead" data-reveal>من السدر الجبلي النادر لحد عسل البرسيم اللي على سفرتك كل يوم. كل نوع ليه طعمه، وكل برطمان عليه نفس الضمان.</p>
+  </header>
+  <div class="fam-grid">
+    {fams.map((f) => (
+      <a class="fam" href={`/honey/${f.id}/`} data-family-card data-reveal style={`--tone:${f.tone}`}>
+        <svg class="fam-art" viewBox="0 0 84 96" aria-hidden="true">
+          <path d="M42 3 80 25v46L42 93 4 71V25Z" fill="none" stroke="#F7C45A" stroke-opacity=".5"/>
+          <path d="M42 14 70 30v36L42 82 14 66V30Z" fill={f.tone}/>
+          <path d="M24 36 42 26" stroke="#FFF3D0" stroke-opacity=".6" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h3>{f.name}</h3>
+        <p>{f.blurb}</p>
+        <span class="fam-foot"><span>يبدأ من <b>{priceLabel(f.from)}</b></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .collections{position:relative;z-index:3;background:linear-gradient(180deg,#1A0F07,var(--bg-2))}
+  :global(.js-story) .collections{margin-top:-100vh;border-radius:28px 28px 0 0;box-shadow:0 -40px 80px -20px rgba(0,0,0,.75);border-top:1px solid rgba(247,196,90,.12)}
+  .sec-head{max-width:40rem;margin-bottom:3rem}
+  .fam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
+  .fam{position:relative;display:flex;flex-direction:column;padding:1.8rem 1.6rem 1.4rem;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,rgba(247,235,211,.05),rgba(247,235,211,.015));border:1px solid var(--line);transition:transform .5s var(--ease-out),border-color .4s,box-shadow .5s var(--ease-out)}
+  .fam::before{content:"";position:absolute;inset:-40% -20% auto auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(var(--tone),transparent 65%);opacity:.18;transition:opacity .5s}
+  .fam-art{width:64px;height:74px;margin-bottom:1.2rem;transition:transform .6s var(--ease-out)}
+  .fam h3{font-family:var(--font-display);font-size:1.5rem;line-height:1.3}
+  .fam p{color:var(--muted);font-size:.95rem;margin:.3rem 0 1.2rem;flex:1}
+  .fam-foot{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+  .fam-foot b{color:var(--gold-2)} .fam-foot svg{width:18px;height:18px;color:var(--cream);transition:transform .35s var(--ease-out)}
+  @media (hover:hover){ .fam:hover{transform:translateY(-6px);border-color:rgba(247,196,90,.35);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)} .fam:hover::before{opacity:.32} .fam:hover .fam-art{transform:rotate(-8deg) scale(1.05)} .fam:hover .fam-foot svg{transform:translateX(-4px)} }
+  @media (max-width:900px){ .fam-grid{grid-template-columns:1fr} }
+</style>

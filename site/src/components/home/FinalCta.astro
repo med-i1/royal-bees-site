@@ -1,0 +1,18 @@
+---
+import { SITE } from '../../config';
+import { whatsappUrl } from '../../lib/order';
+const hello = whatsappUrl(`السلام عليكم، عايز أطلب من ${SITE.name}.`);
+---
+<section class="section final-cta">
+  <h2 class="h2" data-reveal>جاهز تطلب؟</h2>
+  <p class="lead" data-reveal>ابعتلنا على واتساب أو كلمنا، وإحنا نساعدك تختار.</p>
+  <div class="cta-row" data-reveal>
+    <a class="btn btn-primary" href={hello} target="_blank" rel="noopener">اطلب على واتساب</a>
+    <a class="btn btn-ghost" href={`tel:${SITE.phone}`}>اتصل بينا</a>
+  </div>
+</section>
+<style>
+  .final-cta{text-align:center;background:radial-gradient(60% 80% at 50% 100%,rgba(232,163,23,.16),transparent 70%)}
+  .final-cta .lead{margin:0 auto}
+  .cta-row{display:flex;justify-content:center;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+</style>
