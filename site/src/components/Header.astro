@@ -1,0 +1,42 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../config';
+import { whatsappUrl } from '../lib/order';
+import { NAV } from '../data/nav';
+const hello = whatsappUrl(`السلام عليكم، عندي استفسار عن منتجات ${SITE.name}.`);
+---
+<header class="site-header" data-site-header>
+  <a class="brand" href="/" aria-label={`${SITE.name}، الصفحة الرئيسية`}><Logo size={40} withWordmark /></a>
+  <nav class="nav" aria-label="القائمة الرئيسية">
+    {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+  </nav>
+  <div class="header-actions">
+    <a class="btn btn-ghost btn-sm wa" href={hello} target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.36A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.8.82-3-.2-.31a8.2 8.2 0 1 1 6.96 3.84Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.32-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.85 2.03 4.75 4.75 0 0 0 1 2.53 10.9 10.9 0 0 0 4.18 3.69c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.1-.22-.17-.47-.29Z"/></svg>
+      اطلب على واتساب
+    </a>
+    <button type="button" class="icon-btn order-btn" data-order-open aria-label="طلبك">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8v3H8zM7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/><path d="M6 12h12"/></svg>
+      <span class="badge" data-order-count hidden>٠</span>
+    </button>
+    <button type="button" class="icon-btn menu-btn" data-menu-open aria-label="فتح القائمة" aria-controls="mobile-menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M10 17h10"/></svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem clamp(1rem,4vw,3rem);
+    border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
+  .site-header.scrolled{background:rgba(20,11,5,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+  .nav{display:flex;gap:2.2rem;font-size:.95rem;color:var(--muted)}
+  .nav a{position:relative;padding:.6rem 0;transition:color .25s}
+  .nav a:hover,.nav a[aria-current="page"]{color:var(--cream)}
+  .nav a::after{content:"";position:absolute;inset:auto 0 .35rem 0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease-out)}
+  .nav a:hover::after{transform:scaleX(1)}
+  .header-actions{display:flex;align-items:center;gap:.5rem}
+  .order-btn{position:relative}
+  .badge{position:absolute;top:-4px;inset-inline-end:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--gold);color:#2A1606;font-size:.75rem;font-weight:600;line-height:20px;text-align:center}
+  .menu-btn{display:none}
+  @media (max-width:900px){ .nav,.wa{display:none} .menu-btn{display:grid} }
+</style>

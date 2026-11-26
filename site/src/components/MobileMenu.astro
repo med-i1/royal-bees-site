@@ -1,0 +1,20 @@
+---
+import { NAV, MORE } from '../data/nav';
+import { SITE } from '../config';
+---
+<div id="mobile-menu" class="mmenu" hidden>
+  <button type="button" class="icon-btn mmenu-close" data-menu-close aria-label="إغلاق القائمة">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <nav aria-label="القائمة">
+    {[...NAV, ...MORE].map((n) => <a href={n.href}>{n.label}</a>)}
+  </nav>
+  <a class="mmenu-tel" href={`tel:${SITE.phone}`}>اتصل بينا: {SITE.phone}</a>
+</div>
+<style>
+  .mmenu{position:fixed;inset:0;z-index:70;background:var(--bg);padding:5rem var(--pad-x) 2rem;display:flex;flex-direction:column;gap:2rem}
+  .mmenu-close{position:absolute;top:.75rem;inset-inline-end:1rem}
+  .mmenu nav{display:grid;gap:.4rem}
+  .mmenu nav a{font-family:var(--font-display);font-size:1.9rem;padding:.4rem 0;border-bottom:1px solid var(--line)}
+  .mmenu-tel{color:var(--gold-2);min-height:44px;display:flex;align-items:center}
+</style>

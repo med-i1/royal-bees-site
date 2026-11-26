@@ -6,11 +6,15 @@ import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
 import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
-import Logo from '../components/Logo.astro';
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import OrderDrawer from '../components/OrderDrawer.astro';
 import { SITE } from '../config';
 
-interface Props { title: string; description: string; image?: string; noindex?: boolean }
-const { title, description, image = '/og-default.jpg', noindex = false } = Astro.props;
+interface Props { title: string; description: string; image?: string; noindex?: boolean; flush?: boolean }
+const { title, description, image = '/og-default.jpg', noindex = false, flush = false } = Astro.props;
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -31,14 +35,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
+    <ClientRouter />
     <slot name="head" />
   </head>
   <body>
-    <header class="site-header-min"><a href="/" aria-label={`${SITE.name}، الصفحة الرئيسية`}><Logo size={40} withWordmark /></a></header>
-    <main id="main"><slot /></main>
+    <a class="skip" href="#main">تخطَّ للمحتوى</a>
+    <Header />
+    <MobileMenu />
+    <main id="main" class:list={[{ padded: !flush }]}><slot /></main>
+    <Footer />
+    <OrderDrawer />
+    <script>import "../scripts/header"; import "../scripts/order-ui";</script>
   </body>
 </html>
 
 <style>
-  .site-header-min{padding:.85rem var(--pad-x)}
+  .padded{padding-top:5.5rem}
+  .skip{position:absolute;inset-inline-start:1rem;top:-100px;z-index:100;background:var(--gold);color:#2A1606;padding:.6rem 1rem;border-radius:8px}
+  .skip:focus{top:1rem}
 </style>

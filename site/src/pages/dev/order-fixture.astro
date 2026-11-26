@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import AddToOrder from '../../components/AddToOrder.astro';
+import { bySlug } from '../../data/products';
+const p = bySlug('sidr-doani')!;
+---
+<Base title="اختبار الطلب" description="صفحة اختبار" noindex>
+  <section class="section">
+    <AddToOrder product={p} variant="ربع كيلو" />
+    <p><a href="/">إلى الرئيسية</a></p>
+  </section>
+</Base>

@@ -1,0 +1,19 @@
+---
+import type { Product } from '../data/products';
+interface Props { product: Product; variant?: string; compact?: boolean; class?: string }
+const { product, variant, compact = false, class: cls = '' } = Astro.props;
+const v = product.variants.find((x) => x.label === variant) ?? product.variants[0];
+---
+<button
+  type="button"
+  class:list={['btn', compact ? 'btn-ghost btn-sm add-compact' : 'btn-primary', cls]}
+  data-add-order
+  data-slug={product.slug}
+  data-name={product.name}
+  data-variant={v.label}
+  data-price={v.price}
+  aria-label={compact ? `أضف ${product.name} (${v.label}) للطلب` : undefined}
+>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+  {compact ? 'أضف' : 'أضف للطلب'}
+</button>

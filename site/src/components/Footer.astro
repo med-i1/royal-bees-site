@@ -1,0 +1,41 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../config';
+import { NAV, MORE } from '../data/nav';
+import { arDigits } from '../lib/format';
+const year = arDigits(new Date().getFullYear());
+---
+<footer class="site-footer">
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <Logo size={96} />
+      <p>عسل طبيعي بضمان التحليل المعملي، منذ {arDigits(SITE.founded)} في {SITE.address}.</p>
+    </div>
+    <nav aria-label="روابط الموقع">
+      <h2>الموقع</h2>
+      {[...NAV, ...MORE].map((n) => <a href={n.href}>{n.label}</a>)}
+    </nav>
+    <div>
+      <h2>تواصل معنا</h2>
+      <a href={`tel:${SITE.phone}`}>{SITE.phone}</a>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      <p>{SITE.address}</p>
+      <p class="ft-note">{SITE.delivery}</p>
+    </div>
+  </div>
+  <p class="ft-copy">© {year} {SITE.name}. كل الحقوق محفوظة.</p>
+</footer>
+
+<style>
+  .site-footer{position:relative;z-index:3;background:var(--bg-2);border-top:1px solid var(--line);padding:4rem var(--pad-x) 2rem}
+  .ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem}
+  .ft-brand p{color:var(--muted);margin-top:1rem;max-width:26rem}
+  .site-footer h2{font-family:var(--font-display);font-size:1.15rem;margin-bottom:.8rem;color:var(--gold-2)}
+  .site-footer nav,.site-footer div{display:flex;flex-direction:column;gap:.2rem}
+  .site-footer a{color:var(--cream);min-height:40px;display:flex;align-items:center}
+  .site-footer a:hover{color:var(--gold-2)}
+  .site-footer p{color:var(--muted)}
+  .ft-note{color:var(--gold-2) !important}
+  .ft-copy{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.85rem;text-align:center}
+  @media (max-width:900px){ .ft-grid{grid-template-columns:1fr} }
+</style>
