@@ -1,7 +1,8 @@
 ---
+import { u } from '../../lib/url';
 ---
 <section class="guarantee" id="guarantee" aria-labelledby="gTitle">
-  <video class="g-video" muted loop playsinline preload="none" poster="/media/guarantee-poster.jpg" data-src="/media/guarantee.mp4" aria-hidden="true"></video>
+  <video class="g-video" muted loop playsinline preload="none" poster={u('/media/guarantee-poster.jpg')} data-src={u('/media/guarantee.mp4')} aria-hidden="true"></video>
   <div class="g-shade" aria-hidden="true"></div>
   <div class="g-inner">
     <p class="eyebrow" data-reveal>الضمان الذهبي</p>
@@ -11,7 +12,7 @@
       <li data-reveal><span>٢</span><b>حلّل في أي معمل معتمد</b><p>إنت اللي تختار المعمل.</p></li>
       <li data-reveal><span>٣</span><b>لو مش طبيعي فلوسك ترجع</b><p>بنرجعلك تمن العسل كامل.</p></li>
     </ol>
-    <a class="btn btn-ghost" href="/guarantee/" data-reveal>تفاصيل الضمان</a>
+    <a class="btn btn-ghost" href={u('/guarantee/')} data-reveal>تفاصيل الضمان</a>
   </div>
 </section>
 <style>

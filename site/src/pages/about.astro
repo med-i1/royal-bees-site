@@ -1,16 +1,17 @@
 ---
+import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
 import { arDigits } from '../lib/format';
 ---
 <Base title="عن مملكة النحل" description={`مملكة النحل: عسل طبيعي منذ ${SITE.founded} في ${SITE.address}، بضمان التحليل المعملي.`}>
   <section class="about">
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">عن مملكة النحل</li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li aria-current="page">عن مملكة النحل</li></ol>
     <p class="eyebrow">منذ {arDigits(SITE.founded)}</p>
     <h1>عسل نعرفه كويس، <span class="accent">من سنة {arDigits(SITE.founded)}</span></h1>
     <p class="lead">من {SITE.address}، مملكة النحل بتقدم عسل السدر الجبلي والمانوكا وعسل التصدير المصري ومنتجات الخلية.</p>
-    <p class="lead">وعشان إحنا واثقين من اللي بنبيعه، كل برطمان عليه <a href="/guarantee/">الضمان الذهبي</a>: لو التحليل المعملي أثبت إن العسل مش طبيعي، فلوسك ترجعلك كاملة.</p>
-    <div class="row"><a class="btn btn-primary" href="/honey/">تصفّح العسل</a><a class="btn btn-ghost" href="/contact/">تواصل معانا</a></div>
+    <p class="lead">وعشان إحنا واثقين من اللي بنبيعه، كل برطمان عليه <a href={u('/guarantee/')}>الضمان الذهبي</a>: لو التحليل المعملي أثبت إن العسل مش طبيعي، فلوسك ترجعلك كاملة.</p>
+    <div class="row"><a class="btn btn-primary" href={u('/honey/')}>تصفّح العسل</a><a class="btn btn-ghost" href={u('/contact/')}>تواصل معانا</a></div>
   </section>
 </Base>
 <style>

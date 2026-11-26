@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import '@fontsource/el-messiri/arabic-500.css';
 import '@fontsource/el-messiri/arabic-700.css';
 import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
@@ -16,7 +17,7 @@ import JsonLd from '../components/JsonLd.astro';
 import { organizationLd } from '../lib/jsonld';
 
 interface Props { title: string; description: string; image?: string; noindex?: boolean; flush?: boolean }
-const { title, description, image = '/og-default.jpg', noindex = false, flush = false } = Astro.props;
+const { title, description, image = u('/og-default.jpg'), noindex = false, flush = false } = Astro.props;
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -29,7 +30,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
     {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ar_EG" />

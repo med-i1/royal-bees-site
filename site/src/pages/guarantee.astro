@@ -1,9 +1,10 @@
 ---
+import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 ---
 <Base title="الضمان الذهبي" description="ضمان مملكة النحل: لو التحليل المعملي أثبت إن العسل غير طبيعي، فلوسك ترجعلك كاملة.">
   <section class="g-page">
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">الضمان الذهبي</li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li aria-current="page">الضمان الذهبي</li></ol>
     <p class="eyebrow">الضمان الذهبي</p>
     <h1>تحليل معملي… <span class="accent">أو فلوسك ترجعلك كاملة</span></h1>
     <blockquote>«إذا ثبت بالتحليل المخبري أن العسل غير طبيعي يحق للعميل استرجاع حقه كاملا»</blockquote>
@@ -13,8 +14,8 @@ import Base from '../layouts/Base.astro';
       <li><b>حلّله في أي معمل معتمد</b> تختاره إنت.</li>
       <li><b>لو التحليل أثبت إنه مش طبيعي</b>، تواصل معانا بنتيجة التحليل وبنرجعلك تمنه كامل.</li>
     </ol>
-    <p class="lead">عندك سؤال عن الضمان؟ <a href="/contact/">تواصل معانا</a>.</p>
-    <a class="btn btn-primary" href="/honey/">اختار عسلك</a>
+    <p class="lead">عندك سؤال عن الضمان؟ <a href={u('/contact/')}>تواصل معانا</a>.</p>
+    <a class="btn btn-primary" href={u('/honey/')}>اختار عسلك</a>
   </section>
 </Base>
 <style>

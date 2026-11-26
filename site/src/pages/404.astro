@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 ---
 <Base title="الصفحة مش موجودة" description="الصفحة اللي بتدور عليها مش موجودة." noindex>
@@ -6,7 +7,7 @@ import Base from '../layouts/Base.astro';
     <p class="eyebrow">٤٠٤</p>
     <h1>الصفحة دي <span class="accent">مش موجودة</span></h1>
     <p class="lead">يمكن الرابط اتغير. تقدر تكمل من هنا:</p>
-    <div class="row"><a class="btn btn-primary" href="/honey/">تصفّح العسل</a><a class="btn btn-ghost" href="/">الرئيسية</a></div>
+    <div class="row"><a class="btn btn-primary" href={u('/honey/')}>تصفّح العسل</a><a class="btn btn-ghost" href={u('/')}>الرئيسية</a></div>
   </section>
 </Base>
 <style>

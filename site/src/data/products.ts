@@ -1,3 +1,5 @@
+import { u } from '../lib/url';
+
 // Catalog snapshot copied from royalbeeseg.com on 2026-11-26 and confirmed by the client.
 export type FamilyId = 'sidr' | 'manuka' | 'export' | 'zero-sucrose' | 'hive' | 'mixes-nuts';
 export type Tag = 'light' | 'strong' | 'gift' | 'no-sucrose' | 'wholesale';
@@ -92,7 +94,7 @@ const seeds: Seed[] = [
   { slug: 'nuts-mixed', name: 'مكسرات مشكل', family: 'mixes-nuts', short: 'مكسرات مشكلة.', variants: [G(200, 210), G(350, 345)] },
 ];
 
-export const PRODUCTS: Product[] = seeds.map((s) => ({ ...s, image: `/images/products/${s.slug}.webp` }));
+export const PRODUCTS: Product[] = seeds.map((s) => ({ ...s, image: u(`/images/products/${s.slug}.webp`) }));
 
 export function byFamily(id: FamilyId): Product[] {
   return PRODUCTS.filter((p) => p.family === id);

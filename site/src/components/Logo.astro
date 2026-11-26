@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 // Royal Bees roundel. Vector source: src/assets/logo.svg (redrawn from assets/logo-source.png, client approval pending).
 // Served as a pre-rendered raster: inline SVG text-on-path cost seconds of main-thread time on mid-range phones.
 // Re-render after editing the SVG: node scripts/render-logo.mjs
@@ -6,7 +7,7 @@ interface Props { size?: number; withWordmark?: boolean; class?: string }
 const { size = 40, withWordmark = false, class: cls = '' } = Astro.props;
 ---
 <span class:list={['logo', cls]}>
-  <img src="/images/logo-160.webp" srcset="/images/logo-160.webp 160w, /images/logo-384.webp 384w" sizes={`${size}px`} width={size} height={size} alt={withWordmark ? '' : 'شعار مملكة النحل'} decoding="async" />
+  <img src={u('/images/logo-160.webp')} srcset={"" + u("/images/logo-160.webp") + " 160w, " + u("/images/logo-384.webp") + " 384w"} sizes={`${size}px`} width={size} height={size} alt={withWordmark ? '' : 'شعار مملكة النحل'} decoding="async" />
   {withWordmark && <span class="logo-word">مملكة النحل</span>}
 </span>
 

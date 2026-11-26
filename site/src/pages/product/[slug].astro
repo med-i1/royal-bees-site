@@ -1,4 +1,5 @@
 ---
+import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import AddToOrder from '../../components/AddToOrder.astro';
 import SizePicker from '../../components/SizePicker.astro';
@@ -19,14 +20,14 @@ const fam = familyById(product.family);
 const v0 = product.variants[0];
 const related = byFamily(product.family).filter((p) => p.slug !== product.slug).slice(0, 3);
 const url = new URL(Astro.url.pathname, Astro.site).href;
-const crumbs = breadcrumbLd([{ name: 'الرئيسية', url: Astro.site!.href }, { name: fam.name, url: new URL(`/honey/${fam.id}/`, Astro.site).href }, { name: product.name, url }]);
+const crumbs = breadcrumbLd([{ name: 'الرئيسية', url: new URL(u('/'), Astro.site).href }, { name: fam.name, url: new URL(u(`/honey/${fam.id}/`), Astro.site).href }, { name: product.name, url }]);
 const quick = whatsappUrl(buildMessage([{ slug: product.slug, name: product.name, variant: v0.label, unitPrice: v0.price, qty: 1 }]));
 ---
 <Base title={product.name} description={`${product.name}: ${product.short} من ${SITE.name}، بضمان التحليل المعملي. ${SITE.delivery}.`} image={product.image}>
   <JsonLd slot="head" data={productLd(product, url)} />
   <JsonLd slot="head" data={crumbs} />
   <header class="page-head">
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href={`/honey/${fam.id}/`}>{fam.name}</a></li><li aria-current="page">{product.name}</li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li><a href={u(`/honey/${fam.id}/`)}>{fam.name}</a></li><li aria-current="page">{product.name}</li></ol>
   </header>
 
   <section class="pdp" data-product data-slug={product.slug} data-name={product.name}>
@@ -46,7 +47,7 @@ const quick = whatsappUrl(buildMessage([{ slug: product.slug, name: product.name
         <a class="quick" href={`tel:${SITE.phone}`}>أو اتصل بينا: {SITE.phone}</a>
       </div>
 
-      <a class="badge-g" href="/guarantee/">
+      <a class="badge-g" href={u('/guarantee/')}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12.2 2.2 2.2 4.4-4.6"/></svg>
         <span><b>الضمان الذهبي</b> لو التحليل المعملي أثبت إنه مش طبيعي، فلوسك ترجعلك كاملة.</span>
       </a>

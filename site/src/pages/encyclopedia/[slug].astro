@@ -1,4 +1,5 @@
 ---
+import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
@@ -7,12 +8,12 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
-<Base title={post.data.title} description={post.data.description} image={post.data.cover}>
+<Base title={post.data.title} description={post.data.description} image={post.data.cover && u(post.data.cover)}>
   <article class="prose">
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href="/encyclopedia/">موسوعة العسل</a></li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li><a href={u('/encyclopedia/')}>موسوعة العسل</a></li></ol>
     <h1>{post.data.title}</h1>
     <Content />
-    <p class="cta"><a class="btn btn-primary" href="/honey/sidr/">تصفّح عسل السدر</a></p>
+    <p class="cta"><a class="btn btn-primary" href={u('/honey/sidr/')}>تصفّح عسل السدر</a></p>
   </article>
 </Base>
 <style>

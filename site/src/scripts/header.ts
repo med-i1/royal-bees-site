@@ -11,8 +11,9 @@ function init() {
   addEventListener('scroll', onScroll, { passive: true, signal });
   onScroll();
   const path = location.pathname;
+  const home = document.querySelector<HTMLAnchorElement>('a.brand')?.pathname ?? '/';
   document.querySelectorAll<HTMLAnchorElement>('.nav a').forEach((a) => {
-    if (path.startsWith(a.pathname) && a.pathname !== '/') a.setAttribute('aria-current', 'page');
+    if (path.startsWith(a.pathname) && a.pathname !== home) a.setAttribute('aria-current', 'page');
   });
   const setMenu = (open: boolean) => {
     if (!menu) return;

@@ -1,11 +1,12 @@
 ---
+import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { FAMILIES, PRODUCTS } from '../../data/products';
 ---
 <Base title="كل العسل" description="كتالوج مملكة النحل: سدر جبلي، مانوكا، عسل التصدير، زيرو سكروز، منتجات الخلية والمكسرات، بالأحجام والأسعار.">
   <header class="page-head">
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">كل العسل</li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li aria-current="page">كل العسل</li></ol>
     <h1>كل العسل</h1>
     <p class="lead">اختار العائلة، ورتّب بالسعر، وضيف اللي يعجبك لطلبك.</p>
   </header>

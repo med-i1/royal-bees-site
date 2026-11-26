@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import Logo from './Logo.astro';
 import { SITE } from '../config';
 import { whatsappUrl } from '../lib/order';
@@ -6,7 +7,7 @@ import { NAV } from '../data/nav';
 const hello = whatsappUrl(`السلام عليكم، عندي استفسار عن منتجات ${SITE.name}.`);
 ---
 <header class="site-header" data-site-header>
-  <a class="brand" href="/"><Logo size={40} withWordmark /></a>
+  <a class="brand" href={u('/')}><Logo size={40} withWordmark /></a>
   <nav class="nav" aria-label="القائمة الرئيسية">
     {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
   </nav>

@@ -1,20 +1,21 @@
 ---
+import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const posts = (await getCollection('encyclopedia')).sort((a, b) => +b.data.date - +a.data.date);
 ---
 <Base title="موسوعة عسل النحل" description="مقالات من مملكة النحل عن أنواع العسل، وإزاي تفرّق الأصلي من المغشوش.">
   <header class="page-head">
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li aria-current="page">موسوعة العسل</li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li aria-current="page">موسوعة العسل</li></ol>
     <h1>موسوعة عسل النحل</h1>
     <p class="lead">اعرف عسلك أكتر: أنواعه، وإزاي تختاره، وإزاي تفرّق الأصلي من المغشوش.</p>
   </header>
   <section class="posts">
     {posts.map((p) => (
       <article class="post" data-article-card data-reveal>
-        {p.data.cover && <div class="post-img"><img src={p.data.cover} alt="" width="800" height="800" loading="lazy" /></div>}
+        {p.data.cover && <div class="post-img"><img src={u(p.data.cover)} alt="" width="800" height="800" loading="lazy" /></div>}
         <div class="post-body">
-          <h2><a href={`/encyclopedia/${p.id}/`}>{p.data.title}</a></h2>
+          <h2><a href={u(`/encyclopedia/${p.id}/`)}>{p.data.title}</a></h2>
           <p>{p.data.description}</p>
         </div>
       </article>

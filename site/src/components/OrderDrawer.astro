@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import { SITE } from '../config';
 ---
 <div class="drawer-scrim" data-order-scrim hidden></div>
@@ -9,7 +10,7 @@ import { SITE } from '../config';
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
   </div>
-  <p class="drawer-empty" data-order-empty>لسه ما ضفتش حاجة. اختار عسلك من <a href="/honey/">الكتالوج</a>.</p>
+  <p class="drawer-empty" data-order-empty>لسه ما ضفتش حاجة. اختار عسلك من <a href={u('/honey/')}>الكتالوج</a>.</p>
   <ul class="drawer-list" data-order-list></ul>
   <p class="drawer-note" data-order-note role="status" aria-live="polite"></p>
   <div class="drawer-foot" data-order-foot>

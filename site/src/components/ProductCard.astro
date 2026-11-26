@@ -3,9 +3,10 @@ import type { Product } from '../data/products';
 import { fromPrice } from '../data/products';
 import { priceLabel } from '../lib/format';
 import AddToOrder from './AddToOrder.astro';
+import { u } from '../lib/url';
 interface Props { product: Product; reveal?: boolean }
 const { product, reveal = true } = Astro.props;
-const href = `/product/${product.slug}/`;
+const href = u(`/product/${product.slug}/`);
 ---
 <article class="pcard" data-product-card data-tags={(product.tags ?? []).join(' ')} data-family={product.family} data-price={fromPrice(product)} data-reveal={reveal ? '' : undefined}>
   <a class="pcard-img" href={href} tabindex="-1" aria-hidden="true">

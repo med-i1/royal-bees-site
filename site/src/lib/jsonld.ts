@@ -1,15 +1,17 @@
 import { SITE } from '../config';
 import type { Product } from '../data/products';
 
-const ORIGIN = 'https://royalbeeseg.com';
+import { u } from './url';
+
+const ORIGIN = ((import.meta as ImportMeta & { env?: { SITE?: string } }).env?.SITE ?? 'https://royalbeeseg.com').replace(/\/$/, '');
 
 export function organizationLd(): object {
   return {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'LocalBusiness'],
     name: SITE.name,
-    url: ORIGIN + '/',
-    logo: ORIGIN + '/favicon.svg',
+    url: ORIGIN + u('/'),
+    logo: ORIGIN + u('/images/logo-384.webp'),
     telephone: SITE.phone,
     email: SITE.email,
     foundingDate: String(SITE.founded),

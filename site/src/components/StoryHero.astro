@@ -1,10 +1,11 @@
 ---
+import { u } from '../lib/url';
 import { SITE } from '../config';
 import { arDigits } from '../lib/format';
 import { whatsappUrl } from '../lib/order';
 const hello = whatsappUrl(`السلام عليكم، عايز أطلب من ${SITE.name}.`);
 ---
-<section class="story" id="story" aria-labelledby="heroTitle">
+<section class="story" id="story" aria-labelledby="heroTitle" style={`--poster:url(${u('/media/story-poster.jpg')});--poster-m:url(${u('/media/story-poster-mobile.jpg')})`}>
   <div class="stage">
     <div class="stage-fx" id="stageFx">
       <div class="media" aria-hidden="true"><div class="zoom" id="heroZoom"><canvas id="heroCanvas"></canvas></div></div>
@@ -21,7 +22,7 @@ const hello = whatsappUrl(`السلام عليكم، عايز أطلب من ${SI
             </h1>
             <p class="lead" data-intro>سدر جبلي، مانوكا، وعسل مصري بجودة التصدير، وكل برطمان عليه ضمان ذهبي.</p>
             <div class="actions" data-intro>
-              <a class="btn btn-primary" href="/honey/">تصفّح العسل
+              <a class="btn btn-primary" href={u('/honey/')}>تصفّح العسل
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
               <a class="btn btn-ghost" href={hello} target="_blank" rel="noopener">اطلب على واتساب</a>
             </div>
@@ -42,7 +43,7 @@ const hello = whatsappUrl(`السلام عليكم، عايز أطلب من ${SI
             <p class="eyebrow">الضمان الذهبي</p>
             <p class="beat-line">تحليل معملي…<br><span class="accent">أو فلوسك ترجعلك كاملة</span></p>
             <p class="lead">لو أي تحليل معتمد أثبت إن العسل مش طبيعي، بنرجعلك تمنه كله.</p>
-            <div class="actions"><a class="btn btn-primary" href="/honey/">اختار عسلك</a></div>
+            <div class="actions"><a class="btn btn-primary" href={u('/honey/')}>اختار عسلك</a></div>
           </div>
         </div>
       </div>
@@ -61,7 +62,7 @@ const hello = whatsappUrl(`السلام عليكم، عايز أطلب من ${SI
   .js-story .story{height:330vh}
   .js-story .stage{position:sticky;top:0}
   .stage-fx{position:absolute;inset:0;will-change:transform,opacity}
-  .story .media{position:absolute;inset:0;z-index:-2;background:#140B05 url("/media/story-poster.jpg") left center/cover no-repeat}
+  .story .media{position:absolute;inset:0;z-index:-2;background:#140B05 var(--poster) left center/cover no-repeat}
   .story .media canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s ease}
   .story .media canvas.ready{opacity:1}
   .story .zoom{position:absolute;inset:0;will-change:transform}
@@ -102,7 +103,7 @@ const hello = whatsappUrl(`السلام عليكم، عايز أطلب من ${SI
 
   @media (max-width:900px){
     .stage-inner{grid-template-columns:1fr;align-items:end;padding:0 1.25rem 1.6rem;text-align:center}
-    .story .media{inset:0 0 auto 0;height:64svh;background-image:url("/media/story-poster-mobile.jpg");background-position:center 30%}
+    .story .media{inset:0 0 auto 0;height:64svh;background-image:var(--poster-m);background-position:center 30%}
     .story .media::after{content:"";position:absolute;inset:0;background:
       linear-gradient(to top, var(--bg) 0%, rgba(20,11,5,.88) 16%, rgba(20,11,5,.35) 34%, rgba(20,11,5,0) 52%),
       linear-gradient(to bottom, rgba(20,11,5,.65) 0%, rgba(20,11,5,0) 16%)}

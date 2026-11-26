@@ -1,4 +1,5 @@
 ---
+import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import JsonLd from '../../components/JsonLd.astro';
@@ -13,14 +14,14 @@ const fam = FAMILIES.find((f) => f.id === id)!;
 const items = byFamily(id);
 ---
 <Base title={fam.name} description={`${fam.name} من مملكة النحل: ${fam.blurb} بضمان التحليل المعملي.`}>
-  <JsonLd slot="head" data={breadcrumbLd([{ name: 'الرئيسية', url: Astro.site!.href }, { name: 'كل العسل', url: new URL('/honey/', Astro.site).href }, { name: fam.name, url: new URL(Astro.url.pathname, Astro.site).href }])} />
+  <JsonLd slot="head" data={breadcrumbLd([{ name: 'الرئيسية', url: new URL(u('/'), Astro.site).href }, { name: 'كل العسل', url: new URL(u('/honey/'), Astro.site).href }, { name: fam.name, url: new URL(Astro.url.pathname, Astro.site).href }])} />
   <header class="page-head" style={`--tone:${fam.tone}`}>
-    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href="/honey/">كل العسل</a></li><li aria-current="page">{fam.name}</li></ol>
+    <ol class="crumbs"><li><a href={u('/')}>الرئيسية</a></li><li><a href={u('/honey/')}>كل العسل</a></li><li aria-current="page">{fam.name}</li></ol>
     <h1>{fam.name}</h1>
     <p class="lead">{fam.blurb}</p>
   </header>
   <nav class="fam-nav chip-row" aria-label="عائلات المنتجات">
-    {FAMILIES.map((f) => <a class="chip" href={`/honey/${f.id}/`} aria-current={f.id === id ? 'page' : undefined}>{f.name}</a>)}
+    {FAMILIES.map((f) => <a class="chip" href={u(`/honey/${f.id}/`)} aria-current={f.id === id ? 'page' : undefined}>{f.name}</a>)}
   </nav>
   <section class="catalog-wrap"><h2 class="sr-only">منتجات {fam.name}</h2><div class="catalog-grid" data-family-grid>{items.map((p) => <ProductCard product={p} />)}</div></section>
 </Base>

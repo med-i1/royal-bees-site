@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { motionAllowed, onCleanup } from './motion';
 import { frameForProgress, frameLoadOrder } from '../lib/story-math';
+import { u } from '../lib/url';
 
 const FRAMES = 64;
 const STOPS = [0, 0.3, 0.66];
@@ -38,7 +39,7 @@ function initStory() {
     canvas.classList.add('ready');
   };
   const loadSet = () => {
-    const dir = mobileMQ.matches ? '/media/story/m/' : '/media/story/d/';
+    const dir = u('/') + (mobileMQ.matches ? 'media/story/m/' : 'media/story/d/');
     imgs = new Array(FRAMES);
     drawn = null;
     for (const i of frameLoadOrder(FRAMES)) {
