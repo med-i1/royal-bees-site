@@ -35,6 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
+    <script is:inline>(function(){var c=navigator.connection||{};var low=c.saveData||/(^|-)2g$/.test(c.effectiveType||"");if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!low)document.documentElement.classList.add("js","js-story");})();</script>
     <ClientRouter />
     <slot name="head" />
   </head>
@@ -45,12 +46,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <main id="main" class:list={[{ padded: !flush }]}><slot /></main>
     <Footer />
     <OrderDrawer />
-    <script>import "../scripts/header"; import "../scripts/order-ui";</script>
+    <script>
+      import { initMotion } from "../scripts/motion";
+      import "../scripts/header";
+      import "../scripts/order-ui";
+      document.addEventListener("astro:page-load", initMotion);
+    </script>
   </body>
 </html>
 
 <style>
   .padded{padding-top:5.5rem}
+  :global(.js [data-reveal]){opacity:0;transform:translateY(40px)}
   .skip{position:absolute;inset-inline-start:1rem;top:-100px;z-index:100;background:var(--gold);color:#2A1606;padding:.6rem 1rem;border-radius:8px}
   .skip:focus{top:1rem}
 </style>
