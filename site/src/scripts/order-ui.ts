@@ -99,8 +99,8 @@ function init() {
     const t = e.target as HTMLElement;
     const add = t.closest<HTMLElement>('[data-add-order]');
     if (add) {
-      const { slug = '', name = '', variant = '', price = '0' } = add.dataset;
-      const r = addLine(lines, { slug, name, variant, unitPrice: Number(price) });
+      const { slug = '', name = '', variant = '', price = '0', qty = '1' } = add.dataset;
+      const r = addLine(lines, { slug, name, variant, unitPrice: Number(price) }, Math.max(1, Number(qty) || 1));
       if (!r.added) { note(`وصلت لأقصى عدد (${arDigits(MAX_LINES)})، ابعت الطلب ده الأول`); open(add); return; }
       note('');
       commit(r.lines);

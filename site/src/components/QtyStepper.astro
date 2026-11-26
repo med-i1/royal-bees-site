@@ -1,0 +1,12 @@
+---
+---
+<div class="stepper" data-qty-stepper>
+  <button type="button" data-qty-dec aria-label="قلل الكمية">−</button>
+  <output data-qty aria-live="polite">١</output>
+  <button type="button" data-qty-inc aria-label="زوّد الكمية">+</button>
+</div>
+<style>
+  .stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+  .stepper button{width:48px;height:48px;border:0;background:transparent;color:var(--cream);font-size:1.3rem;cursor:pointer;border-radius:50%}
+  .stepper output{min-width:2.4em;text-align:center;font-weight:600}
+</style>

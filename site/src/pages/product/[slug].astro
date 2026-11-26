@@ -1,0 +1,95 @@
+---
+import Base from '../../layouts/Base.astro';
+import AddToOrder from '../../components/AddToOrder.astro';
+import SizePicker from '../../components/SizePicker.astro';
+import QtyStepper from '../../components/QtyStepper.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { PRODUCTS, byFamily, familyById, type Product } from '../../data/products';
+import { priceLabel } from '../../lib/format';
+import { buildMessage, whatsappUrl } from '../../lib/order';
+import { SITE } from '../../config';
+
+export function getStaticPaths() {
+  return PRODUCTS.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+const { product } = Astro.props as { product: Product };
+const fam = familyById(product.family);
+const v0 = product.variants[0];
+const related = byFamily(product.family).filter((p) => p.slug !== product.slug).slice(0, 3);
+const quick = whatsappUrl(buildMessage([{ slug: product.slug, name: product.name, variant: v0.label, unitPrice: v0.price, qty: 1 }]));
+---
+<Base title={product.name} description={`${product.name}: ${product.short} من ${SITE.name}، بضمان التحليل المعملي. ${SITE.delivery}.`} image={product.image}>
+  <header class="page-head">
+    <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href={`/honey/${fam.id}/`}>{fam.name}</a></li><li aria-current="page">{product.name}</li></ol>
+  </header>
+
+  <section class="pdp" data-product data-slug={product.slug} data-name={product.name}>
+    <div class="pdp-media"><img src={product.image} alt={product.name} width="800" height="800" /></div>
+    <div class="pdp-info">
+      <p class="eyebrow">{fam.name}{product.origin && ` · ${product.origin}`}</p>
+      <h1>{product.name}</h1>
+      <p class="lead">{product.short}</p>
+
+      <div class="field"><span class="field-label">الحجم</span><SizePicker variants={product.variants} /></div>
+      <p class="unit"><b data-unit-price>{priceLabel(v0.price)}</b><span>للعبوة</span></p>
+      <div class="field qty-row"><span class="field-label">الكمية</span><QtyStepper /><span class="total">الإجمالي <b data-line-total>{priceLabel(v0.price)}</b></span></div>
+
+      <div class="buy">
+        <AddToOrder product={product} />
+        <a class="quick" data-quick-wa href={quick} target="_blank" rel="noopener">اطلب ده بس على واتساب</a>
+        <a class="quick" href={`tel:${SITE.phone}`}>أو اتصل بينا: {SITE.phone}</a>
+      </div>
+
+      <a class="badge-g" href="/guarantee/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12.2 2.2 2.2 4.4-4.6"/></svg>
+        <span><b>الضمان الذهبي</b> لو التحليل المعملي أثبت إنه مش طبيعي، فلوسك ترجعلك كاملة.</span>
+      </a>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="related" data-related aria-labelledby="relTitle">
+      <h2 class="h2" id="relTitle">ممكن يعجبك كمان</h2>
+      <div class="catalog-grid">{related.map((p) => <ProductCard product={p} />)}</div>
+    </section>
+  )}
+
+  <div class="buy-bar" data-buy-bar>
+    <b data-bar-price>{priceLabel(v0.price)}</b>
+    <AddToOrder product={product} />
+  </div>
+</Base>
+<script>import '../../scripts/product';</script>
+
+<style>
+  .pdp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);padding:0 var(--pad-x) 4rem;align-items:start}
+  .pdp-media{position:sticky;top:6rem;aspect-ratio:1;border-radius:26px;background:#F4EEE3;padding:8%;overflow:hidden}
+  .pdp-media img{width:100%;height:100%;object-fit:contain}
+  .pdp-info h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);line-height:1.25;margin:.5rem 0 .6rem}
+  .field{display:grid;gap:.6rem;margin-top:1.6rem}
+  .field-label{color:var(--muted);font-size:.9rem}
+  .unit{display:flex;align-items:baseline;gap:.6rem;margin-top:1.2rem}
+  .unit b{font-family:var(--font-display);font-size:2.2rem;color:var(--gold-2);display:inline-block}
+  .unit span{color:var(--muted)}
+  .qty-row{grid-template-columns:auto auto 1fr;align-items:center}
+  .qty-row .field-label{grid-column:1/-1}
+  .total{justify-self:end;color:var(--muted)} .total b{color:var(--cream);display:inline-block}
+  .buy{display:grid;gap:.4rem;margin-top:1.8rem}
+  .buy :global(.btn){width:100%}
+  .quick{min-height:44px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:underline}
+  .quick:hover{color:var(--gold-2)}
+  .badge-g{display:flex;gap:.8rem;align-items:flex-start;margin-top:1.6rem;padding:1rem 1.1rem;border:1px solid rgba(247,196,90,.25);border-radius:16px;color:var(--muted);font-size:.92rem}
+  .badge-g svg{width:26px;height:26px;color:var(--gold-2);flex:none} .badge-g b{color:var(--cream);margin-inline-end:.3rem}
+  .related{padding:2rem var(--pad-x) 5rem}
+  .related h2{margin-bottom:1.5rem}
+  .buy-bar{display:none}
+  @media (max-width:900px){
+    .pdp{grid-template-columns:1fr}
+    .pdp-media{position:relative;top:0}
+    .buy-bar{position:fixed;inset:auto 0 0 0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));
+      background:rgba(28,16,8,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+    .buy-bar b{font-family:var(--font-display);font-size:1.4rem;color:var(--gold-2)}
+    .buy-bar :global(.btn){min-height:48px}
+    :global(.site-footer){padding-bottom:6rem}
+  }
+</style>
