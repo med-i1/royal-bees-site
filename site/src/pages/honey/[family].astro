@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { breadcrumbLd } from '../../lib/jsonld';
 import { FAMILIES, byFamily, type FamilyId } from '../../data/products';
 
 export function getStaticPaths() {
@@ -11,6 +13,7 @@ const fam = FAMILIES.find((f) => f.id === id)!;
 const items = byFamily(id);
 ---
 <Base title={fam.name} description={`${fam.name} من مملكة النحل: ${fam.blurb} بضمان التحليل المعملي.`}>
+  <JsonLd slot="head" data={breadcrumbLd([{ name: 'الرئيسية', url: Astro.site!.href }, { name: 'كل العسل', url: new URL('/honey/', Astro.site).href }, { name: fam.name, url: new URL(Astro.url.pathname, Astro.site).href }])} />
   <header class="page-head" style={`--tone:${fam.tone}`}>
     <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href="/honey/">كل العسل</a></li><li aria-current="page">{fam.name}</li></ol>
     <h1>{fam.name}</h1>

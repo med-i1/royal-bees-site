@@ -8,8 +8,12 @@ import Chooser from '../components/home/Chooser.astro';
 import Numbers from '../components/home/Numbers.astro';
 import Faq from '../components/home/Faq.astro';
 import FinalCta from '../components/home/FinalCta.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { faqLd } from '../lib/jsonld';
+import { FAQ } from '../data/faq';
 ---
 <Base title="مملكة النحل" description="عسل سدر جبلي، مانوكا، وعسل مصري بجودة التصدير، بضمان التحليل المعملي. منذ ١٩٩٠ في أبو النمرس، الجيزة." flush>
+  <JsonLd slot="head" data={faqLd(FAQ)} />
   <StoryHero />
   <Collections />
   <Featured />

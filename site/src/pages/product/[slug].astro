@@ -8,6 +8,8 @@ import { PRODUCTS, byFamily, familyById, type Product } from '../../data/product
 import { priceLabel } from '../../lib/format';
 import { buildMessage, whatsappUrl } from '../../lib/order';
 import { SITE } from '../../config';
+import JsonLd from '../../components/JsonLd.astro';
+import { productLd, breadcrumbLd } from '../../lib/jsonld';
 
 export function getStaticPaths() {
   return PRODUCTS.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
@@ -16,9 +18,13 @@ const { product } = Astro.props as { product: Product };
 const fam = familyById(product.family);
 const v0 = product.variants[0];
 const related = byFamily(product.family).filter((p) => p.slug !== product.slug).slice(0, 3);
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const crumbs = breadcrumbLd([{ name: 'الرئيسية', url: Astro.site!.href }, { name: fam.name, url: new URL(`/honey/${fam.id}/`, Astro.site).href }, { name: product.name, url }]);
 const quick = whatsappUrl(buildMessage([{ slug: product.slug, name: product.name, variant: v0.label, unitPrice: v0.price, qty: 1 }]));
 ---
 <Base title={product.name} description={`${product.name}: ${product.short} من ${SITE.name}، بضمان التحليل المعملي. ${SITE.delivery}.`} image={product.image}>
+  <JsonLd slot="head" data={productLd(product, url)} />
+  <JsonLd slot="head" data={crumbs} />
   <header class="page-head">
     <ol class="crumbs"><li><a href="/">الرئيسية</a></li><li><a href={`/honey/${fam.id}/`}>{fam.name}</a></li><li aria-current="page">{product.name}</li></ol>
   </header>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dev/
+
+Sitemap: https://royalbeeseg.com/sitemap-index.xml

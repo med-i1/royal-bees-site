@@ -12,6 +12,8 @@ import Footer from '../components/Footer.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import OrderDrawer from '../components/OrderDrawer.astro';
 import { SITE } from '../config';
+import JsonLd from '../components/JsonLd.astro';
+import { organizationLd } from '../lib/jsonld';
 
 interface Props { title: string; description: string; image?: string; noindex?: boolean; flush?: boolean }
 const { title, description, image = '/og-default.jpg', noindex = false, flush = false } = Astro.props;
@@ -37,6 +39,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image" content={new URL(image, Astro.site)} />
     <script is:inline>(function(){var c=navigator.connection||{};var low=c.saveData||/(^|-)2g$/.test(c.effectiveType||"");if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!low)document.documentElement.classList.add("js","js-story");})();</script>
     <ClientRouter />
+    <JsonLd data={organizationLd()} />
     <slot name="head" />
   </head>
   <body>
